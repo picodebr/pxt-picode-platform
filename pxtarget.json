@@ -1,9 +1,9 @@
 {
-    "id": "maker",
+    "id": "picode",
     "platformid": "codal",
-    "nickname": "maker",
-    "name": "MakeCode Maker (Cortex class)",
-    "title": "MakeCode Maker - Blocks / Javascript editor",
+    "nickname": "picode",
+    "name": "MakeCode Pi Code",
+    "title": "Pi Code Platform",
     "description": "A Blocks / JavaScript code editor for MakeCode Maker Boards",
     "corepkg": "core",
     "bundleddirs": [
@@ -60,35 +60,7 @@
         "libs/radio",
         "libs/radio-broadcast",
         "libs/matrix-keypad",
-        "libs/adafruit-feather-m0-express",
-        "libs/adafruit-feather-m4-express",
-        "libs/adafruit-feather-nrf52840-express",
-        "libs/nucleo-f411re",
-        "libs/adafruit-circuit-playground-express",
-        "libs/adafruit-circuit-playground-bluefruit",
-        "libs/adafruit-trinket-m0",
-        "libs/adafruit-metro-m0-express",
-        "libs/adafruit-metro-m4-express",
-        "libs/adafruit-itsybitsy-m0-express",
-        "libs/adafruit-itsybitsy-m4-express",
-        "libs/adafruit-itsybitsy-nrf52840-express",
-        "libs/adafruit-neotrellis-m4-express",
-        "libs/adafruit-gemma-m0",
-        "libs/robotics-masters-robohatmm1-m4",
-        "libs/xinabox-cc03",
-        "libs/xinabox-cs11",
-        "libs/arduino-zero",
-        "libs/arduino-mkr1000",
-        "libs/arduino-mkr1010",
-        "libs/arduino-mkr1300",
-        "libs/arduino-nano-33-ble-sense",
-        "libs/electroniccats-meow-meow",
-        "libs/electroniccats-escornabot-makech",
-        "libs/sparkfun-samd21-dev-breakout",
-        "libs/sparkfun-samd21-mini-breakout",
-        "libs/sparkfun-redboard-turbo",
-        "libs/sparkfun-lumidrive",
-        "libs/stitchkit"
+        "libs/learnboard"
     ],
     "serial": {
         "useHF2": true,
@@ -226,7 +198,7 @@
                 "openocdScript": "source [find interface/cmsis-dap.cfg]; source [find target/nrf52.cfg]",
                 "flashChecksumAddr": 0,
                 "webUSB": false,
-                "uf2Family": "0xada52840"                
+                "uf2Family": "0xada52840"
             },
             "compileService": {
                 "codalTarget": {

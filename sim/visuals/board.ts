@@ -10,6 +10,7 @@ namespace pxsim.visuals {
     const PIN_LBL_HOVER_SIZE = PIN_LBL_SIZE * 1.5;
     const SQUARE_PIN_WIDTH = PIN_DIST * 0.66666;
     const SQUARE_PIN_HOVER_WIDTH = PIN_DIST * 0.66666 + PIN_DIST / 3.0;
+    var NUMS = 0;
 
     const STYLE = `
 .sim-board-pin {
@@ -248,8 +249,16 @@ namespace pxsim.visuals {
         element: SVGElement;
 
         constructor(x: number, y: number, private colorOn: string, private pin: Pin, w: number, h: number) {
-            this.backElement = svg.elt("rect", { x, y, width: w, height: h, fill: this.colorOff });
-            this.ledElement = svg.elt("rect", { x, y, width: w, height: h, fill: this.colorOn, opacity: 0 });
+            if (NUMS == 0 && pin.id == 1) {
+                this.backElement = svg.elt("rect", { x, y, width: w, height: h, fill: this.colorOff });
+                this.ledElement = svg.elt("rect", { x, y, width: w, height: h, fill: this.colorOn, opacity: 0 });
+                NUMS++;
+            } else {
+                this.backElement = svg.elt("circle", { cx: x + w / 2, cy: y + h / 2, r: w * 0.01, fill: this.colorOff, opacity: 0 }) as SVGCircleElement
+                // this.backElement.setAttribute("opacity", "1");
+                this.ledElement = svg.elt("circle", { cx: x + w / 2, cy: y + h / 2, r: w / 2, fill: this.colorOn, opacity: 0 }) as SVGCircleElement
+                NUMS = 0;
+            }
             svg.filter(this.ledElement, `url(#neopixelglow)`);
             this.element = svg.elt("g", { class: "sim-led" });
             this.element.appendChild(this.backElement);
@@ -312,9 +321,13 @@ namespace pxsim.visuals {
             }) as SVGCircleElement
             svg.title(this.element, def.label);
             // resolve button
+            console.log(def);
+            console.log(def.index);
+            console.log(def.label);
             this.button = def.index !== undefined
                 ? pxsim.pxtcore.getButton(def.index)
                 : pxsim.pxtcore.getButtonByPin(pxsim.pinIds[def.label]);
+            console.log(this.button);
             // hooking up events
             pointerEvents.down.forEach(evid => this.element.addEventListener(evid, ev => {
                 this.button.setPressed(true);
