@@ -9,25 +9,27 @@
 @emSize      : 14px;
 @fontSize    : 13px;
 
-@primaryColor: #2f2f2f;
+@primaryColor: #333333;
 @secondaryColor: @blue;
 
-@red:#CC2936;
-@yellow:#FFC914;
+@lightgrey: #808080;
+
+@red:#ff6666;
+@yellow:#ffff7f;
 @teal:#08415C;
 @violet:#C200C0;
 @brown:#2E282A;
-@grey:#999;
+@grey:#333333;
 
 /* Adafruit colors */
-@blue:#2EB7ED;
+@blue:#6699ff;
 @pink:#FB48C7;
 
-@green: #40bf4a; /*#00922B;*/
+@green: #33cc66; /*#87fd21;*/
 @purple:#8073E5;
 @orange:#FFA702;
 
-@pageBackground: #ecf0f1;
+@pageBackground: @grey;
 @serialTextColor: #333;
 
 /*******************************
@@ -57,8 +59,8 @@
    Background
 --------------------*/
 
-@simulatorBackground: #fafafa; /*#313638;*/
-@editorToolsBackground: #dfdfdf; /*#1e1e1e;*/
+@simulatorBackground: @grey
+@editorToolsBackground: @grey; /*#1e1e1e;*/
 @blocklySvgColor: #4c4b4d; /*#1e1e1e;*/
 
 @blocklyFlyoutColor : #eaeaea;
