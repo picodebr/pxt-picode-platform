@@ -2,7 +2,7 @@
     "name": "pxt-picode",
     "version": "0.0.2",
     "description": "Microsoft MakeCode Pi Code Platform",
-    "public": true,
+    "public": false,
     "keywords": [
         "JavaScript",
         "education",
