@@ -1,4 +1,4 @@
-# camera left **deprecated**
+# camera left
 
 Returns the x coordinate of the camera (the left side of the screen).
 
@@ -10,4 +10,4 @@ scene.cameraLeft()
 
 [camera follow sprite](/reference/scene/camera-follow-sprite)
 [center camera at](/reference/scene/center-camera-at)
-[camera property](/reference/scene/camera-property)
+[camera left](/reference/scene/camera-left)

@@ -69,7 +69,7 @@
 </head>
 
 <body id='root' class='root'>
-	<div id="cookiebanner"></div>
+
 	<div id="accessibleMenu" class="ui accessibleMenu borderless fixed menu docs" role="menubar">
 		
             <a href="#maincontent" class="ui item link" tabindex="0" role="menuitem">Skip to main content</a>
@@ -401,7 +401,7 @@
 <pre><code class="lang-sig">game.onUpdate(function () {
 
 })</code></pre>
-<p>There are events available to run code when sprites overlap, collide, are created, or destroyed. Also, you can use events to take action when buttons are pressed or when game counts reach zero. When you want to have code to control what happens in a game on a regular basis though, you need to run that code in an update function.</p>
+<p>There are events available to run code when sprites overlap, collide, are created, or destroyed. Also, you can use events to take action when buttons are pressed or whe game counts reach zero. When you want to have code to control what happens in a game on a regular basis though, you need to run that code in an update function.</p>
 <p>Your program works with the game engine using an update function. The update function is called by the game engine at a regular interval. Inside the update function, you might put in code that checks positions of sprites, conditions that change the score, adjust the life count, or maybe if something happened to end the game.</p>
 <h2 id="the-game-loop">The Game Loop</h2><p>On of the basic parts of game programming is the use of a game loop. This is part of the game engine in board. A game loop keeps the actions in the game moving along. As simple code it might look like this:</p>
 <pre><code class="lang-typescript-ignore">while (!gameOver) {

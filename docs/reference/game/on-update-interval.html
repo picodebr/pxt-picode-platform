@@ -69,7 +69,7 @@
 </head>
 
 <body id='root' class='root'>
-	<div id="cookiebanner"></div>
+
 	<div id="accessibleMenu" class="ui accessibleMenu borderless fixed menu docs" role="menubar">
 		
             <a href="#maincontent" class="ui item link" tabindex="0" role="menuitem">Skip to main content</a>
@@ -401,7 +401,7 @@
 <pre><code class="lang-sig">game.onUpdateInterval(500, function () {
 
 })</code></pre>
-<p>There are events available to run code when sprites overlap, collide, are created, or destroyed. Also, you can use events to take action when buttons are pressed or when game counts reach zero. When you want to have code to control what happens in a game on a regular basis though, you need to run that code in an update function.</p>
+<p>There are events available to run code when sprites overlap, collide, are created, or destroyed. Also, you can use events to take action when buttons are pressed or whe game counts reach zero. When you want to have code to control what happens in a game on a regular basis though, you need to run that code in an update function.</p>
 <p>Your program works with the game engine using an update function. The update function is called by the game engine at an interval of time that you choose. Inside the update function, you might put in code that checks positions of sprites, conditions that change the score, adjust the life count, or maybe if something happened to end the game.</p>
 <p>With <strong>onUpdateInterval</strong>, you decide how often you want your update code to run. This is different from <a  rel="nofollow noopener" href="/pxt-picode/docs/reference/game/on-update.html">onUpdate</a> where the game engine decides when to run your update code.</p>
 <p>If your program has both <a  rel="nofollow noopener" href="/pxt-picode/docs/reference/game/on-update.html">onUpdate</a> and <strong>onUpdateInterval</strong> functions, the code in your <strong>onUpdateInterval</strong> function will run first.</p>

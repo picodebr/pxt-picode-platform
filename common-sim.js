@@ -20,7 +20,7 @@ var pxsim;
             b.accelerometer.activate();
             if (gesture == 11 /* ACCELEROMETER_EVT_SHAKE */ && !b.useShake) {
                 b.useShake = true;
-                runtime.queueDisplayUpdate();
+                pxsim.runtime.queueDisplayUpdate();
             }
             pxsim.pxtcore.registerWithDal(13 /* DEVICE_ID_GESTURE */, gesture, handler);
         }
@@ -358,7 +358,7 @@ var pxsim;
             var _this = this;
             this.element = element;
             this.tiltDecayer = 0;
-            this.element.addEventListener(pointerEvents.move, function (ev) {
+            this.element.addEventListener(pxsim.pointerEvents.move, function (ev) {
                 if (!_this.accelerometer.isActive)
                     return;
                 if (_this.tiltDecayer) {
@@ -375,7 +375,7 @@ var pxsim;
                 _this.accelerometer.update(-x, y, z);
                 _this.updateTilt();
             }, false);
-            this.element.addEventListener(pointerEvents.leave, function (ev) {
+            this.element.addEventListener(pxsim.pointerEvents.leave, function (ev) {
                 if (!_this.accelerometer.isActive)
                     return;
                 if (!_this.tiltDecayer) {
@@ -436,7 +436,7 @@ var pxsim;
         }
         pxtcore.lookupPinCfg = lookupPinCfg;
         function getPinCfg(key) {
-            return getPin(getConfig(key, -1));
+            return getPin(pxtcore.getConfig(key, -1));
         }
         pxtcore.getPinCfg = getPinCfg;
     })(pxtcore = pxsim.pxtcore || (pxsim.pxtcore = {}));
@@ -484,19 +484,19 @@ var pxsim;
 (function (pxsim) {
     var control;
     (function (control) {
-        control.runInParallel = thread.runInBackground;
-        control.delay = thread.pause;
+        control.runInParallel = pxsim.thread.runInBackground;
+        control.delay = pxsim.thread.pause;
         function reset() {
             pxsim.Runtime.postMessage({
                 type: "simulator",
                 command: "restart",
                 controlReset: true
             });
-            var cb = getResume();
+            var cb = pxsim.getResume();
         }
         control.reset = reset;
         function waitMicros(micros) {
-            thread.pause(micros / 1000); // it prempts not much we can do here.
+            pxsim.thread.pause(micros / 1000); // it prempts not much we can do here.
         }
         control.waitMicros = waitMicros;
         function deviceName() {
@@ -546,7 +546,7 @@ var pxsim;
         }
         control.internalOnEvent = internalOnEvent;
         function waitForEvent(id, evid) {
-            var cb = getResume();
+            var cb = pxsim.getResume();
             pxsim.board().bus.wait(id, evid, cb);
         }
         control.waitForEvent = waitForEvent;
@@ -561,11 +561,11 @@ var pxsim;
         }
         control.raiseEvent = raiseEvent;
         function millis() {
-            return runtime.runningTime();
+            return pxsim.runtime.runningTime();
         }
         control.millis = millis;
         function micros() {
-            return runtime.runningTimeUs() & 0x3fffffff;
+            return pxsim.runtime.runningTimeUs() & 0x3fffffff;
         }
         control.micros = micros;
         function delayMicroseconds(us) {
@@ -585,14 +585,14 @@ var pxsim;
         }
         control.setDebugFlags = setDebugFlags;
         function heapSnapshot() {
-            console.log(runtime.traceObjects());
+            console.log(pxsim.runtime.traceObjects());
         }
         control.heapSnapshot = heapSnapshot;
         function toStr(v) {
-            if (v instanceof RefRecord) {
+            if (v instanceof pxsim.RefRecord) {
                 return v.vtable.name + "@" + v.id;
             }
-            if (v instanceof RefCollection) {
+            if (v instanceof pxsim.RefCollection) {
                 var r = "[";
                 for (var _i = 0, _a = v.toArray(); _i < _a.length; _i++) {
                     var e = _a[_i];
@@ -621,7 +621,7 @@ var pxsim;
         function gc() { }
         control.gc = gc;
         function profilingEnabled() {
-            return !!runtime.perfCounters;
+            return !!pxsim.runtime.perfCounters;
         }
         control.profilingEnabled = profilingEnabled;
         function __log(priority, str) {
@@ -641,7 +641,7 @@ var pxsim;
                     break;
             }
             console.log(prefix + str);
-            runtime.board.writeSerial(str);
+            pxsim.runtime.board.writeSerial(str);
         }
         control.__log = __log;
         function heapDump() {
@@ -662,7 +662,7 @@ var pxsim;
         function send(channel, message) {
             if (!channel)
                 return;
-            Runtime.postMessage({
+            pxsim.Runtime.postMessage({
                 type: "messagepacket",
                 broadcast: true,
                 channel: channel,
@@ -679,7 +679,7 @@ var pxsim;
         function readMessageData() {
             var state = pxsim.getControlMessageState();
             var msg = state && state.read();
-            return msg && new RefBuffer(msg.data);
+            return msg && new pxsim.RefBuffer(msg.data);
         }
         pxtcore.readMessageData = readMessageData;
     })(pxtcore = pxsim.pxtcore || (pxsim.pxtcore = {}));
@@ -724,7 +724,7 @@ var pxsim;
 var pxsim;
 (function (pxsim) {
     function board() {
-        return runtime.board;
+        return pxsim.runtime.board;
     }
     pxsim.board = board;
 })(pxsim || (pxsim = {}));
@@ -732,8 +732,8 @@ var pxsim;
 (function (pxsim) {
     var loops;
     (function (loops) {
-        loops.pause = thread.pause;
-        loops.forever = thread.forever;
+        loops.pause = pxsim.thread.pause;
+        loops.forever = pxsim.thread.forever;
     })(loops = pxsim.loops || (pxsim.loops = {}));
 })(pxsim || (pxsim = {}));
 /// <reference path="../../core/dal.d.ts"/>
@@ -756,11 +756,11 @@ var pxsim;
             if (p) {
                 this._wasPressed = true;
                 pxsim.board().bus.queue(this.id, 1 /* DEVICE_BUTTON_EVT_DOWN */);
-                this._pressedTime = runtime.runningTime();
+                this._pressedTime = pxsim.runtime.runningTime();
             }
             else if (this._pressedTime !== -1) {
                 pxsim.board().bus.queue(this.id, 2 /* DEVICE_BUTTON_EVT_UP */);
-                var current = runtime.runningTime();
+                var current = pxsim.runtime.runningTime();
                 if (current - this._pressedTime >= 1000 /* DEVICE_BUTTON_LONG_CLICK_TIME */) {
                     pxsim.board().bus.queue(this.id, 4 /* DEVICE_BUTTON_EVT_LONG_CLICK */);
                 }
@@ -788,7 +788,7 @@ var pxsim;
             return this.pressed;
         };
         return CommonButton;
-    }(Button));
+    }(pxsim.Button));
     pxsim.CommonButton = CommonButton;
     var CommonButtonState = /** @class */ (function () {
         function CommonButtonState(buttons) {
@@ -819,14 +819,14 @@ var pxsim;
         }
         pxtcore.getButtonByPin = getButtonByPin;
         function getButtonByPinCfg(key) {
-            return getButtonByPin(getConfig(key, -1));
+            return getButtonByPin(pxtcore.getConfig(key, -1));
         }
         pxtcore.getButtonByPinCfg = getButtonByPinCfg;
         function getButton(buttonId) {
             var buttons = pxsim.board().buttonState.buttons;
             if (buttonId === 2) {
                 pxsim.board().buttonState.usesButtonAB = true;
-                runtime.queueDisplayUpdate();
+                pxsim.runtime.queueDisplayUpdate();
             }
             if (buttonId < buttons.length && buttonId >= 0) {
                 return buttons[buttonId];
@@ -909,7 +909,7 @@ var pxsim;
             this.PULSE_PACKET_ERROR_EVENT = 0x3;
         }
         CableState.prototype.send = function (buf) {
-            Runtime.postMessage({
+            pxsim.Runtime.postMessage({
                 type: "irpacket",
                 packet: buf.data
             });
@@ -959,7 +959,7 @@ var pxsim;
         AnalogSensorState.prototype.setUsed = function () {
             if (!this.sensorUsed) {
                 this.sensorUsed = true;
-                runtime.queueDisplayUpdate();
+                pxsim.runtime.queueDisplayUpdate();
             }
         };
         AnalogSensorState.prototype.setLevel = function (level) {
@@ -1020,47 +1020,47 @@ var pxsim;
     (function (visuals) {
         function mkBtnSvg(xy) {
             var _a = ["sim-button", "sim-button-outer"], innerCls = _a[0], outerCls = _a[1];
-            var tabSize = PIN_DIST / 2.5;
-            var pegR = PIN_DIST / 5;
-            var btnR = PIN_DIST * .8;
-            var pegMargin = PIN_DIST / 8;
-            var plateR = PIN_DIST / 12;
+            var tabSize = visuals.PIN_DIST / 2.5;
+            var pegR = visuals.PIN_DIST / 5;
+            var btnR = visuals.PIN_DIST * .8;
+            var pegMargin = visuals.PIN_DIST / 8;
+            var plateR = visuals.PIN_DIST / 12;
             var pegOffset = pegMargin + pegR;
             var x = xy[0], y = xy[1];
             var left = x - tabSize / 2;
             var top = y - tabSize / 2;
-            var plateH = 3 * PIN_DIST - tabSize;
-            var plateW = 2 * PIN_DIST + tabSize;
+            var plateH = 3 * visuals.PIN_DIST - tabSize;
+            var plateW = 2 * visuals.PIN_DIST + tabSize;
             var plateL = left;
             var plateT = top + tabSize;
             var btnCX = plateL + plateW / 2;
             var btnCY = plateT + plateH / 2;
-            var btng = svg.elt("g");
+            var btng = pxsim.svg.elt("g");
             //tabs
             var mkTab = function (x, y) {
-                svg.child(btng, "rect", { class: "sim-button-tab", x: x, y: y, width: tabSize, height: tabSize });
+                pxsim.svg.child(btng, "rect", { class: "sim-button-tab", x: x, y: y, width: tabSize, height: tabSize });
             };
             mkTab(left, top);
-            mkTab(left + 2 * PIN_DIST, top);
-            mkTab(left, top + 3 * PIN_DIST);
-            mkTab(left + 2 * PIN_DIST, top + 3 * PIN_DIST);
+            mkTab(left + 2 * visuals.PIN_DIST, top);
+            mkTab(left, top + 3 * visuals.PIN_DIST);
+            mkTab(left + 2 * visuals.PIN_DIST, top + 3 * visuals.PIN_DIST);
             //plate
-            svg.child(btng, "rect", { class: outerCls, x: plateL, y: plateT, rx: plateR, ry: plateR, width: plateW, height: plateH });
+            pxsim.svg.child(btng, "rect", { class: outerCls, x: plateL, y: plateT, rx: plateR, ry: plateR, width: plateW, height: plateH });
             //pegs
             var mkPeg = function (x, y) {
-                svg.child(btng, "circle", { class: "sim-button-nut", cx: x, cy: y, r: pegR });
+                pxsim.svg.child(btng, "circle", { class: "sim-button-nut", cx: x, cy: y, r: pegR });
             };
             mkPeg(plateL + pegOffset, plateT + pegOffset);
             mkPeg(plateL + plateW - pegOffset, plateT + pegOffset);
             mkPeg(plateL + pegOffset, plateT + plateH - pegOffset);
             mkPeg(plateL + plateW - pegOffset, plateT + plateH - pegOffset);
             //inner btn
-            var innerBtn = svg.child(btng, "circle", { class: innerCls, cx: btnCX, cy: btnCY, r: btnR });
+            var innerBtn = pxsim.svg.child(btng, "circle", { class: innerCls, cx: btnCX, cy: btnCY, r: btnR });
             //return
             return { el: btng, y: top, x: left, w: plateW, h: plateH + 2 * tabSize };
         }
         visuals.mkBtnSvg = mkBtnSvg;
-        visuals.BUTTON_PAIR_STYLE = "\n            .sim-button {\n                pointer-events: none;\n                fill: #000;\n            }\n            .sim-button-outer:active ~ .sim-button,\n            .sim-button-virtual:active {\n                fill: #FFA500;\n            }\n            .sim-button-outer {\n                cursor: pointer;\n                fill: #979797;\n            }\n            .sim-button-outer:hover {\n                stroke:gray;\n                stroke-width: " + PIN_DIST / 5 + "px;\n            }\n            .sim-button-nut {\n                fill:#000;\n                pointer-events:none;\n            }\n            .sim-button-nut:hover {\n                stroke:" + PIN_DIST / 15 + "px solid #704A4A;\n            }\n            .sim-button-tab {\n                fill:#FFF;\n                pointer-events:none;\n            }\n            .sim-button-virtual {\n                cursor: pointer;\n                fill: rgba(255, 255, 255, 0.6);\n                stroke: rgba(255, 255, 255, 1);\n                stroke-width: " + PIN_DIST / 5 + "px;\n            }\n            .sim-button-virtual:hover {\n                stroke: rgba(128, 128, 128, 1);\n            }\n            .sim-text-virtual {\n                fill: #000;\n                pointer-events:none;\n            }\n            ";
+        visuals.BUTTON_PAIR_STYLE = "\n            .sim-button {\n                pointer-events: none;\n                fill: #000;\n            }\n            .sim-button-outer:active ~ .sim-button,\n            .sim-button-virtual:active {\n                fill: #FFA500;\n            }\n            .sim-button-outer {\n                cursor: pointer;\n                fill: #979797;\n            }\n            .sim-button-outer:hover {\n                stroke:gray;\n                stroke-width: " + visuals.PIN_DIST / 5 + "px;\n            }\n            .sim-button-nut {\n                fill:#000;\n                pointer-events:none;\n            }\n            .sim-button-nut:hover {\n                stroke:" + visuals.PIN_DIST / 15 + "px solid #704A4A;\n            }\n            .sim-button-tab {\n                fill:#FFF;\n                pointer-events:none;\n            }\n            .sim-button-virtual {\n                cursor: pointer;\n                fill: rgba(255, 255, 255, 0.6);\n                stroke: rgba(255, 255, 255, 1);\n                stroke-width: " + visuals.PIN_DIST / 5 + "px;\n            }\n            .sim-button-virtual:hover {\n                stroke: rgba(128, 128, 128, 1);\n            }\n            .sim-text-virtual {\n                fill: #000;\n                pointer-events:none;\n            }\n            ";
         var ButtonPairView = /** @class */ (function () {
             function ButtonPairView() {
                 this.style = visuals.BUTTON_PAIR_STYLE;
@@ -1074,11 +1074,11 @@ var pxsim;
                 this.attachEvents();
             };
             ButtonPairView.prototype.moveToCoord = function (xy) {
-                var btnWidth = PIN_DIST * 3;
+                var btnWidth = visuals.PIN_DIST * 3;
                 var x = xy[0], y = xy[1];
-                translateEl(this.aBtn, [x, y]);
-                translateEl(this.bBtn, [x + btnWidth, y]);
-                translateEl(this.abBtn, [x + PIN_DIST * 1.5, y + PIN_DIST * 4]);
+                visuals.translateEl(this.aBtn, [x, y]);
+                visuals.translateEl(this.bBtn, [x + btnWidth, y]);
+                visuals.translateEl(this.abBtn, [x + visuals.PIN_DIST * 1.5, y + visuals.PIN_DIST * 4]);
             };
             ButtonPairView.prototype.updateState = function () {
                 var stateBtns = [this.state.aBtn, this.state.bBtn, this.state.abBtn];
@@ -1093,19 +1093,19 @@ var pxsim;
                 this.bBtn = mkBtnSvg([0, 0]).el;
                 var mkVirtualBtn = function () {
                     var numPins = 2;
-                    var w = PIN_DIST * 2.8;
-                    var offset = (w - (numPins * PIN_DIST)) / 2;
-                    var corner = PIN_DIST / 2;
+                    var w = visuals.PIN_DIST * 2.8;
+                    var offset = (w - (numPins * visuals.PIN_DIST)) / 2;
+                    var corner = visuals.PIN_DIST / 2;
                     var cx = 0 - offset + w / 2;
                     var cy = cx;
-                    var txtSize = PIN_DIST * 1.3;
+                    var txtSize = visuals.PIN_DIST * 1.3;
                     var x = -offset;
                     var y = -offset;
-                    var txtXOff = PIN_DIST / 7;
-                    var txtYOff = PIN_DIST / 10;
-                    var btng = svg.elt("g");
-                    var btn = svg.child(btng, "rect", { class: "sim-button-virtual", x: x, y: y, rx: corner, ry: corner, width: w, height: w });
-                    var btnTxt = mkTxt(cx + txtXOff, cy + txtYOff, txtSize, 0, "A+B");
+                    var txtXOff = visuals.PIN_DIST / 7;
+                    var txtYOff = visuals.PIN_DIST / 10;
+                    var btng = pxsim.svg.elt("g");
+                    var btn = pxsim.svg.child(btng, "rect", { class: "sim-button-virtual", x: x, y: y, rx: corner, ry: corner, width: w, height: w });
+                    var btnTxt = visuals.mkTxt(cx + txtXOff, cy + txtYOff, txtSize, 0, "A+B");
                     pxsim.U.addClass(btnTxt, "sim-text");
                     pxsim.U.addClass(btnTxt, "sim-text-virtual");
                     btng.appendChild(btnTxt);
@@ -1113,7 +1113,7 @@ var pxsim;
                 };
                 this.abBtn = mkVirtualBtn();
                 this.abBtn.style.visibility = "hidden";
-                var el = svg.elt("g");
+                var el = pxsim.svg.elt("g");
                 pxsim.U.addClass(el, "sim-buttonpair");
                 el.appendChild(this.aBtn);
                 el.appendChild(this.bBtn);
@@ -1128,10 +1128,10 @@ var pxsim;
                     pxsim.pointerEvents.down.forEach(function (evid) { return btn.addEventListener(evid, function (ev) {
                         btnStates[index].pressed = true;
                     }); });
-                    btn.addEventListener(pointerEvents.leave, function (ev) {
+                    btn.addEventListener(pxsim.pointerEvents.leave, function (ev) {
                         btnStates[index].pressed = false;
                     });
-                    btn.addEventListener(pointerEvents.up, function (ev) {
+                    btn.addEventListener(pxsim.pointerEvents.up, function (ev) {
                         btnStates[index].pressed = false;
                         _this.bus.queue(btnStates[index].id, _this.state.props.BUTTON_EVT_UP);
                         _this.bus.queue(btnStates[index].id, _this.state.props.BUTTON_EVT_CLICK);
@@ -1143,10 +1143,10 @@ var pxsim;
                 pxsim.pointerEvents.down.forEach(function (evid) { return _this.abBtn.addEventListener(evid, function (ev) {
                     updateBtns(true);
                 }); });
-                this.abBtn.addEventListener(pointerEvents.leave, function (ev) {
+                this.abBtn.addEventListener(pxsim.pointerEvents.leave, function (ev) {
                     updateBtns(false);
                 });
-                this.abBtn.addEventListener(pointerEvents.up, function (ev) {
+                this.abBtn.addEventListener(pxsim.pointerEvents.up, function (ev) {
                     updateBtns(false);
                     _this.bus.queue(_this.state.abBtn.id, _this.state.props.BUTTON_EVT_UP);
                     _this.bus.queue(_this.state.abBtn.id, _this.state.props.BUTTON_EVT_CLICK);
@@ -1198,7 +1198,7 @@ var pxsim;
             this.mode = PinFlags.Digital | PinFlags.Output;
             var v = this.value;
             this.value = value > 0 ? 1023 : 0;
-            runtime.queueDisplayUpdate();
+            pxsim.runtime.queueDisplayUpdate();
         };
         Pin.prototype.setPull = function (pull) {
             this.pull = pull;
@@ -1210,7 +1210,7 @@ var pxsim;
                     this.value = 1023;
                     break;
                 default:
-                    this.value = Math_.randomRange(0, 1023);
+                    this.value = pxsim.Math_.randomRange(0, 1023);
                     break;
             }
         };
@@ -1223,17 +1223,17 @@ var pxsim;
             this.mode = PinFlags.Analog | PinFlags.Output;
             var v = this.value;
             this.value = Math.max(0, Math.min(1023, value));
-            runtime.queueDisplayUpdate();
+            pxsim.runtime.queueDisplayUpdate();
         };
         Pin.prototype.analogSetPeriod = function (micros) {
             this.mode = PinFlags.Analog | PinFlags.Output;
             this.period = micros;
-            runtime.queueDisplayUpdate();
+            pxsim.runtime.queueDisplayUpdate();
         };
         Pin.prototype.servoWritePin = function (value) {
             this.analogSetPeriod(20000);
             this.servoAngle = Math.max(0, Math.min(180, value));
-            runtime.queueDisplayUpdate();
+            pxsim.runtime.queueDisplayUpdate();
         };
         Pin.prototype.servoSetContinuous = function (continuous) {
             this.servoContinuous = continuous;
@@ -1414,10 +1414,10 @@ var pxsim;
             var t = y + LED_PART_YOFF;
             var w = LED_PART_WIDTH;
             var h = LED_PART_HEIGHT;
-            var img = svg.elt("image");
-            svg.hydrate(img, {
+            var img = pxsim.svg.elt("image");
+            pxsim.svg.hydrate(img, {
                 class: "sim-led", x: l, y: t, width: w, height: h,
-                href: svg.toDataUri(LED_PART)
+                href: pxsim.svg.toDataUri(LED_PART)
             });
             return { el: img, x: l, y: t, w: w, h: h };
         }
@@ -1434,9 +1434,9 @@ var pxsim;
                 this.updateState();
             };
             LedView.prototype.initDom = function () {
-                this.element = svg.elt("g");
+                this.element = pxsim.svg.elt("g");
                 var image = new DOMParser().parseFromString(LED_PART, "image/svg+xml").querySelector("svg");
-                svg.hydrate(image, {
+                pxsim.svg.hydrate(image, {
                     class: "sim-led", width: LED_PART_WIDTH, height: LED_PART_HEIGHT,
                 });
                 this.led = image.getElementById('LED');
@@ -1444,7 +1444,7 @@ var pxsim;
                 this.element.appendChild(image);
             };
             LedView.prototype.moveToCoord = function (xy) {
-                translateEl(this.element, [xy[0] + LED_PART_XOFF, xy[1] + LED_PART_YOFF]);
+                visuals.translateEl(this.element, [xy[0] + LED_PART_XOFF, xy[1] + LED_PART_YOFF]);
             };
             LedView.prototype.updateTheme = function () {
             };
@@ -1475,7 +1475,7 @@ var pxsim;
     var visuals;
     (function (visuals) {
         function createMicroServoElement() {
-            return svg.parseString("\n        <svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svg2\" width=\"112.188\" height=\"299.674\">\n          <g id=\"layer1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" transform=\"scale(0.8)\">\n            <path id=\"path8212\" fill=\"#0061ff\" stroke-width=\"6.6\" d=\"M.378 44.61v255.064h112.188V44.61H.378z\"/>\n            <path id=\"crankbase\" fill=\"#00f\" stroke-width=\"6.6\" d=\"M56.57 88.047C25.328 88.047 0 113.373 0 144.615c.02 22.352 11.807 42.596 32.238 51.66.03 3.318.095 5.24.088 7.938 0 13.947 11.307 25.254 25.254 25.254 13.947 0 25.254-11.307 25.254-25.254-.006-2.986-.415-5.442-.32-8.746 19.487-9.45 30.606-29.195 30.625-50.852 0-31.24-25.33-56.568-56.57-56.568z\"/>\n            <path id=\"lowertip\" fill=\"#00a2ff\" stroke-width=\"2\" d=\"M.476 260.78v38.894h53.82v-10.486a6.82 6.566 0 0 1-4.545-6.182 6.82 6.566 0 0 1 6.82-6.566 6.82 6.566 0 0 1 6.82 6.566 6.82 6.566 0 0 1-4.545 6.182v10.486h53.82V260.78H.475z\"/>\n            <path id=\"uppertip\" fill=\"#00a2ff\" stroke-width=\"2\" d=\"M112.566 83.503V44.61h-53.82v10.487a6.82 6.566 0 0 1 4.544 6.18 6.82 6.566 0 0 1-6.818 6.568 6.82 6.566 0 0 1-6.82-6.567 6.82 6.566 0 0 1 4.546-6.18V44.61H.378v38.893h112.188z\"/>\n            <path id=\"VCC\" fill=\"red\" stroke-width=\"2\" d=\"M53.72 21.93h5.504v22.627H53.72z\"/>\n            <path id=\"LOGIC\" fill=\"#fc0\" stroke-width=\"2\" d=\"M47.3 21.93h5.503v22.627H47.3z\"/>\n            <path id=\"GND\" fill=\"#a02c2c\" stroke-width=\"2\" d=\"M60.14 21.93h5.505v22.627H60.14z\"/>\n            <path id=\"connector\" stroke-width=\"2\" d=\"M45.064 0a1.488 1.488 0 0 0-1.488 1.488v24.5a1.488 1.488 0 0 0 1.488 1.487h22.71a1.488 1.488 0 0 0 1.49-1.488v-24.5A1.488 1.488 0 0 0 67.774 0h-22.71z\"/>\n            <g id=\"crank\" transform=\"translate(0 -752.688)\">\n              <path id=\"arm\" fill=\"#ececec\" stroke=\"#000\" stroke-width=\"1.372\" d=\"M47.767 880.88c-4.447 1.162-8.412 8.278-8.412 18.492s3.77 18.312 8.412 18.494c8.024.314 78.496 5.06 78.51-16.952.012-22.013-74.377-21.117-78.51-20.035z\"/>\n              <circle id=\"path8216\" cx=\"56.661\" cy=\"899.475\" r=\"8.972\" fill=\"gray\" stroke-width=\"2\"/>\n            </g>\n          </g>\n        </svg>\n                    ").firstElementChild;
+            return pxsim.svg.parseString("\n        <svg xmlns=\"http://www.w3.org/2000/svg\" id=\"svg2\" width=\"112.188\" height=\"299.674\">\n          <g id=\"layer1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" transform=\"scale(0.8)\">\n            <path id=\"path8212\" fill=\"#0061ff\" stroke-width=\"6.6\" d=\"M.378 44.61v255.064h112.188V44.61H.378z\"/>\n            <path id=\"crankbase\" fill=\"#00f\" stroke-width=\"6.6\" d=\"M56.57 88.047C25.328 88.047 0 113.373 0 144.615c.02 22.352 11.807 42.596 32.238 51.66.03 3.318.095 5.24.088 7.938 0 13.947 11.307 25.254 25.254 25.254 13.947 0 25.254-11.307 25.254-25.254-.006-2.986-.415-5.442-.32-8.746 19.487-9.45 30.606-29.195 30.625-50.852 0-31.24-25.33-56.568-56.57-56.568z\"/>\n            <path id=\"lowertip\" fill=\"#00a2ff\" stroke-width=\"2\" d=\"M.476 260.78v38.894h53.82v-10.486a6.82 6.566 0 0 1-4.545-6.182 6.82 6.566 0 0 1 6.82-6.566 6.82 6.566 0 0 1 6.82 6.566 6.82 6.566 0 0 1-4.545 6.182v10.486h53.82V260.78H.475z\"/>\n            <path id=\"uppertip\" fill=\"#00a2ff\" stroke-width=\"2\" d=\"M112.566 83.503V44.61h-53.82v10.487a6.82 6.566 0 0 1 4.544 6.18 6.82 6.566 0 0 1-6.818 6.568 6.82 6.566 0 0 1-6.82-6.567 6.82 6.566 0 0 1 4.546-6.18V44.61H.378v38.893h112.188z\"/>\n            <path id=\"VCC\" fill=\"red\" stroke-width=\"2\" d=\"M53.72 21.93h5.504v22.627H53.72z\"/>\n            <path id=\"LOGIC\" fill=\"#fc0\" stroke-width=\"2\" d=\"M47.3 21.93h5.503v22.627H47.3z\"/>\n            <path id=\"GND\" fill=\"#a02c2c\" stroke-width=\"2\" d=\"M60.14 21.93h5.505v22.627H60.14z\"/>\n            <path id=\"connector\" stroke-width=\"2\" d=\"M45.064 0a1.488 1.488 0 0 0-1.488 1.488v24.5a1.488 1.488 0 0 0 1.488 1.487h22.71a1.488 1.488 0 0 0 1.49-1.488v-24.5A1.488 1.488 0 0 0 67.774 0h-22.71z\"/>\n            <g id=\"crank\" transform=\"translate(0 -752.688)\">\n              <path id=\"arm\" fill=\"#ececec\" stroke=\"#000\" stroke-width=\"1.372\" d=\"M47.767 880.88c-4.447 1.162-8.412 8.278-8.412 18.492s3.77 18.312 8.412 18.494c8.024.314 78.496 5.06 78.51-16.952.012-22.013-74.377-21.117-78.51-20.035z\"/>\n              <circle id=\"path8216\" cx=\"56.661\" cy=\"899.475\" r=\"8.972\" fill=\"gray\" stroke-width=\"2\"/>\n            </g>\n          </g>\n        </svg>\n                    ").firstElementChild;
         }
         function mkMicroServoPart(xy) {
             if (xy === void 0) { xy = [0, 0]; }
@@ -1507,7 +1507,7 @@ var pxsim;
             };
             MicroServoView.prototype.moveToCoord = function (xy) {
                 var x = xy[0], y = xy[1];
-                translateEl(this.element, [x, y]);
+                visuals.translateEl(this.element, [x, y]);
             };
             MicroServoView.prototype.updateState = function () {
                 var p = this.state.getPin(this.pin);
@@ -1516,7 +1516,7 @@ var pxsim;
                 if (continuous) {
                     // for a continuous servo, the angle is interpreted as a rotation speed
                     // 0 -> -100%, 90 - 0%, 180 - 100%
-                    var now = U.now();
+                    var now = pxsim.U.now();
                     var dt = Math.min(now - this.lastAngleTime, 50) / 1000;
                     this.currentAngle = this.targetAngle;
                     this.targetAngle += ((servoAngle - 90) / 90) * SPEED * dt;
@@ -1528,7 +1528,7 @@ var pxsim;
                     this.renderAngle();
             };
             MicroServoView.prototype.renderAngle = function () {
-                var now = U.now();
+                var now = pxsim.U.now();
                 var cx = 56.661;
                 var cy = 899.475;
                 var dt = Math.min(now - this.lastAngleTime, 50) / 1000;
@@ -1537,7 +1537,7 @@ var pxsim;
                 this.crankEl.setAttribute("transform", this.crankTransform
                     + (" rotate(" + this.currentAngle + ", " + cx + ", " + cy + ")"));
                 this.lastAngleTime = now;
-                setTimeout(function () { return runtime.updateDisplay(); }, 20);
+                setTimeout(function () { return pxsim.runtime.updateDisplay(); }, 20);
             };
             MicroServoView.prototype.updateTheme = function () {
             };
@@ -1619,7 +1619,7 @@ var pxsim;
                 return;
             state.mode = mode & 0xff;
             state.buffer = b.data;
-            runtime.queueDisplayUpdate();
+            pxsim.runtime.queueDisplayUpdate();
         }
         light.sendBuffer = sendBuffer;
     })(light = pxsim.light || (pxsim.light = {}));
@@ -1627,15 +1627,15 @@ var pxsim;
 (function (pxsim) {
     var visuals;
     (function (visuals) {
-        var PIXEL_SPACING = PIN_DIST * 3;
-        var PIXEL_RADIUS = PIN_DIST;
-        var CANVAS_WIDTH = 1.2 * PIN_DIST;
-        var CANVAS_HEIGHT = 12 * PIN_DIST;
+        var PIXEL_SPACING = visuals.PIN_DIST * 3;
+        var PIXEL_RADIUS = visuals.PIN_DIST;
+        var CANVAS_WIDTH = 1.2 * visuals.PIN_DIST;
+        var CANVAS_HEIGHT = 12 * visuals.PIN_DIST;
         var CANVAS_VIEW_WIDTH = CANVAS_WIDTH;
         var CANVAS_VIEW_HEIGHT = CANVAS_HEIGHT;
-        var CANVAS_VIEW_PADDING = PIN_DIST * 4;
-        var CANVAS_LEFT = 1.4 * PIN_DIST;
-        var CANVAS_TOP = PIN_DIST;
+        var CANVAS_VIEW_PADDING = visuals.PIN_DIST * 4;
+        var CANVAS_LEFT = 1.4 * visuals.PIN_DIST;
+        var CANVAS_TOP = visuals.PIN_DIST;
         // For the instructions parts list
         function mkNeoPixelPart(xy) {
             if (xy === void 0) { xy = [0, 0]; }
@@ -1649,10 +1649,10 @@ var pxsim;
             var t = y + NP_PART_YOFF;
             var w = NP_PART_WIDTH;
             var h = NP_PART_HEIGHT;
-            var img = svg.elt("image");
-            svg.hydrate(img, {
+            var img = pxsim.svg.elt("image");
+            pxsim.svg.hydrate(img, {
                 class: "sim-neopixel-strip", x: l, y: t, width: w, height: h,
-                href: svg.toDataUri(NEOPIXEL_PART_IMG)
+                href: pxsim.svg.toDataUri(NEOPIXEL_PART_IMG)
             });
             return { el: img, x: l, y: t, w: w, h: h };
         }
@@ -1660,11 +1660,11 @@ var pxsim;
         var NeoPixel = /** @class */ (function () {
             function NeoPixel(xy) {
                 if (xy === void 0) { xy = [0, 0]; }
-                var el = svg.elt("rect");
+                var el = pxsim.svg.elt("rect");
                 var r = PIXEL_RADIUS;
                 var cx = xy[0], cy = xy[1];
                 var y = cy - r;
-                svg.hydrate(el, { x: "-50%", y: y, width: "100%", height: r * 2, class: "sim-neopixel" });
+                pxsim.svg.hydrate(el, { x: "-50%", y: y, width: "100%", height: r * 2, class: "sim-neopixel" });
                 this.el = el;
                 this.cy = cy;
             }
@@ -1683,8 +1683,8 @@ var pxsim;
             function NeoPixelCanvas(pin) {
                 this.pixels = [];
                 this.pin = pin;
-                var el = svg.elt("svg");
-                svg.hydrate(el, {
+                var el = pxsim.svg.elt("svg");
+                pxsim.svg.hydrate(el, {
                     "class": "sim-neopixel-canvas",
                     "x": "0px",
                     "y": "0px",
@@ -1692,13 +1692,13 @@ var pxsim;
                     "height": CANVAS_HEIGHT + "px",
                 });
                 this.canvas = el;
-                this.background = svg.child(el, "rect", { class: "sim-neopixel-background hidden" });
+                this.background = pxsim.svg.child(el, "rect", { class: "sim-neopixel-background hidden" });
                 this.updateViewBox(-CANVAS_VIEW_WIDTH / 2, 0, CANVAS_VIEW_WIDTH, CANVAS_VIEW_HEIGHT);
             }
             NeoPixelCanvas.prototype.updateViewBox = function (x, y, w, h) {
                 this.viewBox = [x, y, w, h];
-                svg.hydrate(this.canvas, { "viewBox": x + " " + y + " " + w + " " + h });
-                svg.hydrate(this.background, { "x": x, "y": y, "width": w, "height": h });
+                pxsim.svg.hydrate(this.canvas, { "viewBox": x + " " + y + " " + w + " " + h });
+                pxsim.svg.hydrate(this.background, { "x": x, "y": y, "width": w, "height": h });
             };
             NeoPixelCanvas.prototype.update = function (colors) {
                 if (!colors || colors.length <= 0)
@@ -1708,7 +1708,7 @@ var pxsim;
                     if (!pixel) {
                         var cxy = [0, CANVAS_VIEW_PADDING + i * PIXEL_SPACING];
                         pixel = this.pixels[i] = new NeoPixel(cxy);
-                        svg.hydrate(pixel.el, { title: "offset: " + i });
+                        pxsim.svg.hydrate(pixel.el, { title: "offset: " + i });
                         this.canvas.appendChild(pixel.el);
                     }
                     var color = colors[i];
@@ -1729,7 +1729,7 @@ var pxsim;
             };
             NeoPixelCanvas.prototype.setLoc = function (xy) {
                 var x = xy[0], y = xy[1];
-                svg.hydrate(this.canvas, { x: x, y: y });
+                pxsim.svg.hydrate(this.canvas, { x: x, y: y });
             };
             return NeoPixelCanvas;
         }());
@@ -1741,7 +1741,7 @@ var pxsim;
                 this.style = "\n            .sim-neopixel-canvas {\n            }\n            .sim-neopixel-canvas-parent:hover {\n                transform-origin: center;\n                transform: scale(4) translateY(-220px);\n                -moz-transform: scale(4) translateY(-220px);\n            }\n            .sim-neopixel-canvas .hidden {\n                visibility:hidden;\n            }\n            .sim-neopixel-background {\n                fill: rgba(255,255,255,0.9);\n            }\n            .sim-neopixel-strip {\n            }\n        ";
             }
             NeoPixelView.prototype.init = function (bus, state, svgEl, otherParams) {
-                this.stripGroup = svg.elt("g");
+                this.stripGroup = pxsim.svg.elt("g");
                 this.element = this.stripGroup;
                 this.pin = this.parsePinString(otherParams["dataPin"] || otherParams["pin"])
                     || this.parsePinString("pins.NEOPIXEL")
@@ -1753,7 +1753,7 @@ var pxsim;
                 this.stripGroup.appendChild(part.el);
                 var canvas = new NeoPixelCanvas(this.pin.id);
                 this.canvas = canvas;
-                var canvasG = svg.elt("g", { class: "sim-neopixel-canvas-parent" });
+                var canvasG = pxsim.svg.elt("g", { class: "sim-neopixel-canvas-parent" });
                 this.overElement = canvasG;
                 canvasG.appendChild(canvas.canvas);
                 this.updateStripLoc();
@@ -1766,9 +1766,9 @@ var pxsim;
             };
             NeoPixelView.prototype.updateStripLoc = function () {
                 var _a = this.lastLocation, x = _a[0], y = _a[1];
-                U.assert(typeof x === "number" && typeof y === "number", "invalid x,y for NeoPixel strip");
+                pxsim.U.assert(typeof x === "number" && typeof y === "number", "invalid x,y for NeoPixel strip");
                 this.canvas.setLoc([x + CANVAS_LEFT, y + CANVAS_TOP]);
-                svg.hydrate(this.part.el, { transform: "translate(" + x + " " + y + ")" }); //TODO: update part's l,h, etc.
+                pxsim.svg.hydrate(this.part.el, { transform: "translate(" + x + " " + y + ")" }); //TODO: update part's l,h, etc.
             };
             NeoPixelView.prototype.updateState = function () {
                 var colors = [];
@@ -1800,10 +1800,10 @@ var pxsim;
             var t = y + PHOTOCELL_PART_YOFF;
             var w = PHOTOCELL_PART_WIDTH;
             var h = PHOTOCELL_PART_HEIGHT;
-            var img = svg.elt("image");
-            svg.hydrate(img, {
+            var img = pxsim.svg.elt("image");
+            pxsim.svg.hydrate(img, {
                 class: "sim-led", x: l, y: t, width: w, height: h,
-                href: svg.toDataUri(PHOTOCELL_PART)
+                href: pxsim.svg.toDataUri(PHOTOCELL_PART)
             });
             return { el: img, x: l, y: t, w: w, h: h };
         }
@@ -1821,9 +1821,9 @@ var pxsim;
             };
             PhotoCellView.prototype.initDom = function () {
                 var _this = this;
-                this.element = svg.elt("g");
+                this.element = pxsim.svg.elt("g");
                 var image = new DOMParser().parseFromString(PHOTOCELL_PART, "image/svg+xml").querySelector("svg");
-                svg.hydrate(image, {
+                pxsim.svg.hydrate(image, {
                     class: "sim-led", width: PHOTOCELL_PART_WIDTH, height: PHOTOCELL_PART_HEIGHT,
                 });
                 //this.led = image.getElementById('LED') as SVGPathElement;
@@ -1833,11 +1833,11 @@ var pxsim;
                 this.element.onclick = function () {
                     _this.pin.value += 256;
                     _this.pin.value = _this.pin.value % 1024;
-                    runtime.queueDisplayUpdate();
+                    pxsim.runtime.queueDisplayUpdate();
                 };
             };
             PhotoCellView.prototype.moveToCoord = function (xy) {
-                translateEl(this.element, [xy[0] + PHOTOCELL_PART_XOFF, xy[1] + PHOTOCELL_PART_YOFF]);
+                visuals.translateEl(this.element, [xy[0] + PHOTOCELL_PART_XOFF, xy[1] + PHOTOCELL_PART_YOFF]);
             };
             PhotoCellView.prototype.updateTheme = function () {
             };
@@ -1900,7 +1900,7 @@ var pxsim;
         function markUsed(pin) {
             if (pin && !pin.used) {
                 pin.used = true;
-                runtime.queueDisplayUpdate();
+                pxsim.runtime.queueDisplayUpdate();
             }
         }
         pins.markUsed = markUsed;
@@ -2162,10 +2162,10 @@ var pxsim;
             var t = y + SWITCH_PART_YOFF;
             var w = SWITCH_PART_WIDTH;
             var h = SWITCH_PART_HEIGHT;
-            var img = svg.elt("image");
-            svg.hydrate(img, {
+            var img = pxsim.svg.elt("image");
+            pxsim.svg.hydrate(img, {
                 class: "sim-led", x: l, y: t, width: w, height: h,
-                href: svg.toDataUri(SWITCH_PART_SVG_OFF)
+                href: pxsim.svg.toDataUri(SWITCH_PART_SVG_OFF)
             });
             return { el: img, x: l, y: t, w: w, h: h };
         }
@@ -2174,11 +2174,11 @@ var pxsim;
             function ToggleComponentVisual(parsePinString) {
                 var _this = this;
                 this.currentlyOn = false;
-                this.element = svg.elt("g");
+                this.element = pxsim.svg.elt("g");
                 this.element.onclick = function () {
                     if (_this.state) {
                         _this.state.toggle();
-                        runtime.queueDisplayUpdate();
+                        pxsim.runtime.queueDisplayUpdate();
                     }
                 };
                 this.onElement = this.initImage(SWITCH_PART_SVG_ON);
@@ -2188,7 +2188,7 @@ var pxsim;
             }
             ToggleComponentVisual.prototype.moveToCoord = function (xy) {
                 var to = [xy[0] + SWITCH_PART_XOFF, xy[1] + SWITCH_PART_YOFF];
-                translateEl(this.element, to);
+                visuals.translateEl(this.element, to);
             };
             ToggleComponentVisual.prototype.init = function (bus, state, svgEl, otherParams) {
                 this.state = state(this.parsePinString(otherParams["pin"]));
@@ -2211,12 +2211,12 @@ var pxsim;
             ToggleComponentVisual.prototype.updateTheme = function () { };
             ToggleComponentVisual.prototype.initImage = function (svgData) {
                 var image = "data:image/svg+xml," + encodeURIComponent(svgData);
-                var imgAndSize = mkImageSVG({
+                var imgAndSize = visuals.mkImageSVG({
                     image: image,
                     width: SWITCH_PART_WIDTH,
                     height: SWITCH_PART_HEIGHT,
                     imageUnitDist: SWITCH_PART_PIN_DIST,
-                    targetUnitDist: PIN_DIST
+                    targetUnitDist: visuals.PIN_DIST
                 });
                 return imgAndSize.el;
             };
@@ -2297,7 +2297,7 @@ var pxsim;
             this.IR_PACKET_ERROR_EVENT = 0x3;
         }
         InfraredState.prototype.send = function (buf) {
-            Runtime.postMessage({
+            pxsim.Runtime.postMessage({
                 type: "irpacket",
                 packet: buf.data,
                 broadcast: true
@@ -2310,7 +2310,7 @@ var pxsim;
             pxsim.pxtcore.registerWithDal(this.IR_COMPONENT_ID, this.IR_PACKET_ERROR_EVENT, body);
         };
         InfraredState.prototype.receive = function (buf) {
-            this.packet = new RefBuffer(buf);
+            this.packet = new pxsim.RefBuffer(buf);
             this.packetReceived = true;
             pxsim.board().bus.queue(this.IR_COMPONENT_ID, this.IR_PACKET_EVENT);
         };
@@ -2386,7 +2386,7 @@ var pxsim;
         LCDState.prototype.setUsed = function () {
             if (!this.sensorUsed) {
                 this.sensorUsed = true;
-                runtime.queueDisplayUpdate();
+                pxsim.runtime.queueDisplayUpdate();
             }
         };
         return LCDState;
@@ -2428,7 +2428,7 @@ var pxsim;
                 var r = b.cursorPos[1];
                 var s = b.text[r];
                 if (s !== undefined && c >= 0 && c < s.length) {
-                    b.text[r] = s.substring(0, c) + String_.fromCharCode(value) + s.substring(c + 1);
+                    b.text[r] = s.substring(0, c) + pxsim.String_.fromCharCode(value) + s.substring(c + 1);
                     b.cursorPos[0]++;
                 }
             }
@@ -2457,7 +2457,7 @@ var pxsim;
                     b.cursorPos = [0, 0];
                 }
             }
-            runtime.queueDisplayUpdate();
+            pxsim.runtime.queueDisplayUpdate();
         }
         lcd.__write8 = __write8;
     })(lcd = pxsim.lcd || (pxsim.lcd = {}));
@@ -2474,10 +2474,10 @@ var pxsim;
             var t = y;
             var w = LCD_PART_WIDTH;
             var h = LCD_PART_HEIGHT;
-            var img = svg.elt("image");
-            svg.hydrate(img, {
+            var img = pxsim.svg.elt("image");
+            pxsim.svg.hydrate(img, {
                 class: "sim-lcd", x: l, y: t, width: w, height: h,
-                href: svg.toDataUri(LCD_PART)
+                href: pxsim.svg.toDataUri(LCD_PART)
             });
             return { el: img, x: l, y: t, w: w, h: h };
         }
@@ -2492,9 +2492,9 @@ var pxsim;
                 this.updateState();
             };
             LCDView.prototype.initDom = function () {
-                this.element = svg.elt("g");
+                this.element = pxsim.svg.elt("g");
                 this.image = new DOMParser().parseFromString(LCD_PART, "image/svg+xml").querySelector("svg");
-                svg.hydrate(this.image, {
+                pxsim.svg.hydrate(this.image, {
                     class: "sim-lcd", width: LCD_PART_WIDTH, height: LCD_PART_HEIGHT,
                 });
                 this.screen = this.image.getElementById('ecran');
@@ -2507,7 +2507,7 @@ var pxsim;
                 _case.innerHTML = value.charAt(0);
             };
             LCDView.prototype.moveToCoord = function (xy) {
-                translateEl(this.element, [xy[0], xy[1]]);
+                visuals.translateEl(this.element, [xy[0], xy[1]]);
             };
             LCDView.prototype.updateTheme = function () {
             };
@@ -2608,15 +2608,15 @@ var pxsim;
     var music;
     (function (music) {
         function playInstructions(b) {
-            return AudioContextManager.playInstructionsAsync(b);
+            return pxsim.AudioContextManager.playInstructionsAsync(b);
         }
         music.playInstructions = playInstructions;
         function queuePlayInstructions(when, b) {
-            AudioContextManager.queuePlayInstructions(when, b);
+            pxsim.AudioContextManager.queuePlayInstructions(when, b);
         }
         music.queuePlayInstructions = queuePlayInstructions;
         function stopPlaying() {
-            AudioContextManager.muteAllChannels();
+            pxsim.AudioContextManager.muteAllChannels();
         }
         music.stopPlaying = stopPlaying;
         function forceOutput(mode) { }
@@ -2775,16 +2775,16 @@ var pxsim;
             var audioState = pxsim.getAudioState();
             var currentOutput = audioState.outputDestination_;
             audioState.startPlaying();
-            runtime.queueDisplayUpdate();
-            AudioContextManager.tone(frequency, 1);
-            var cb = getResume();
+            pxsim.runtime.queueDisplayUpdate();
+            pxsim.AudioContextManager.tone(frequency, 1);
+            var cb = pxsim.getResume();
             if (ms <= 0)
                 cb();
             else {
-                runtime.schedule(function () {
-                    AudioContextManager.stop();
+                pxsim.runtime.schedule(function () {
+                    pxsim.AudioContextManager.stop();
                     audioState.stopPlaying();
-                    runtime.queueDisplayUpdate();
+                    pxsim.runtime.queueDisplayUpdate();
                     cb();
                 }, ms);
             }
@@ -2831,7 +2831,7 @@ var pxsim;
         }
         radio.setFrequencyBand = setFrequencyBand;
         function sendRawPacket(buf) {
-            var cb = getResume();
+            var cb = pxsim.getResume();
             var state = pxsim.getRadioState();
             state.datagram.send({
                 type: 0,
@@ -2890,11 +2890,11 @@ var pxsim;
         RadioDatagram.prototype.queue = function (packet) {
             if (this.datagram.length < 4)
                 this.datagram.push(packet);
-            runtime.board.bus.queue(this.dal.ID_RADIO, this.dal.RADIO_EVT_DATAGRAM);
+            pxsim.runtime.board.bus.queue(this.dal.ID_RADIO, this.dal.RADIO_EVT_DATAGRAM);
         };
         RadioDatagram.prototype.send = function (payload) {
             var state = getRadioState();
-            Runtime.postMessage({
+            pxsim.Runtime.postMessage({
                 type: "radiopacket",
                 broadcast: true,
                 rssi: this._rssi || -75,
@@ -2935,7 +2935,7 @@ var pxsim;
         }
         RadioState.prototype.addListeners = function () {
             var _this = this;
-            var board = runtime.board;
+            var board = pxsim.runtime.board;
             board.addMessageListener(function (msg) { return _this.messageHandler(msg); });
         };
         RadioState.prototype.messageHandler = function (msg) {
@@ -2961,7 +2961,7 @@ var pxsim;
             this.band = band;
         };
         RadioState.prototype.raiseEvent = function (id, eventid) {
-            Runtime.postMessage({
+            pxsim.Runtime.postMessage({
                 type: "eventbus",
                 broadcast: true,
                 id: id,
@@ -3027,7 +3027,8 @@ var pxsim;
         __extends(RefImage, _super);
         function RefImage(w, h, bpp) {
             var _this = _super.call(this) || this;
-            _this.isStatic = true;
+            _this.dirty = true;
+            _this.isStatic = false;
             _this.data = new Uint8Array(w * h);
             _this._width = w;
             _this._height = h;
@@ -3062,13 +3063,13 @@ var pxsim;
             return [x, y];
         };
         RefImage.prototype.makeWritable = function () {
-            this.isStatic = false;
+            this.dirty = true;
         };
         RefImage.prototype.toDebugString = function () {
             return this._width + "x" + this._height;
         };
         return RefImage;
-    }(RefObject));
+    }(pxsim.RefObject));
     pxsim.RefImage = RefImage;
 })(pxsim || (pxsim = {}));
 (function (pxsim) {
@@ -3082,8 +3083,6 @@ var pxsim;
         ImageMethods.height = height;
         function isMono(img) { return img._bpp == 1; }
         ImageMethods.isMono = isMono;
-        function isStatic(img) { return img.gcIsStatic(); }
-        ImageMethods.isStatic = isStatic;
         function setPixel(img, x, y, c) {
             img.makeWritable();
             if (img.inRange(x, y))
@@ -3775,7 +3774,7 @@ var pxsim;
                         dstP++;
                 }
             }
-            return new RefBuffer(r);
+            return new pxsim.RefBuffer(r);
         }
         image.toBuffer = toBuffer;
         function doubledIcon(buf) {
@@ -3901,7 +3900,7 @@ var pxsim;
             }
         };
         ScreenState.prototype.showImage = function (img) {
-            runtime.startPerfCounter(0);
+            pxsim.runtime.startPerfCounter(0);
             if (!img)
                 img = this.lastImage;
             if (!img)
@@ -3912,19 +3911,26 @@ var pxsim;
                 this.screen = new Uint32Array(this.width * this.height);
             }
             this.lastImageFlushTime = Date.now();
-            this.lastImage = img;
+            if (img == this.lastImage) {
+                if (!img.dirty)
+                    return;
+            }
+            else {
+                this.lastImage = img;
+            }
             this.changed = true;
+            img.dirty = false;
             var src = img.data;
             var dst = this.screen;
             if (this.width != img._width || this.height != img._height || src.length != dst.length)
-                U.userError("wrong size");
+                pxsim.U.userError("wrong size");
             var p = this.palette;
             var mask = p.length - 1;
             for (var i = 0; i < src.length; ++i) {
                 dst[i] = p[src[i] & mask];
             }
             this.onChange();
-            runtime.stopPerfCounter(0);
+            pxsim.runtime.stopPerfCounter(0);
         };
         ScreenState.prototype.updateStats = function (stats) {
             this.stats = stats;
@@ -3947,7 +3953,7 @@ var pxsim;
             this.onChange = function () {
                 arr.set(_this.screen);
                 // paint rect
-                runtime.queueDisplayUpdate();
+                pxsim.runtime.queueDisplayUpdate();
                 if (!requested) {
                     requested = true;
                     window.requestAnimationFrame(flush);
@@ -3982,10 +3988,10 @@ var pxsim;
             var t = y;
             var w = SCREEN_PART_WIDTH;
             var h = SCREEN_PART_HEIGHT;
-            var img = svg.elt("image");
-            svg.hydrate(img, {
+            var img = pxsim.svg.elt("image");
+            pxsim.svg.hydrate(img, {
                 class: "sim-screen", x: l, y: t, width: w, height: h,
-                href: svg.toDataUri(SCREEN_PART)
+                href: pxsim.svg.toDataUri(SCREEN_PART)
             });
             return { el: img, x: l, y: t, w: w, h: h };
         }
@@ -3999,9 +4005,9 @@ var pxsim;
                 this.overElement = undefined;
                 this.defs = [];
                 this.lastLocation = [0, 0];
-                var partSvg = svg.parseString(SCREEN_PART);
+                var partSvg = pxsim.svg.parseString(SCREEN_PART);
                 this.canvas = partSvg.getElementById('thescreen');
-                this.element = svg.elt("g");
+                this.element = pxsim.svg.elt("g");
                 this.element.appendChild(partSvg.firstElementChild);
                 this.state.bindToSvgImage(this.canvas);
             };
@@ -4013,7 +4019,7 @@ var pxsim;
             };
             ScreenView.prototype.updateLoc = function () {
                 var _a = this.lastLocation, x = _a[0], y = _a[1];
-                translateEl(this.element, [x, y]);
+                visuals.translateEl(this.element, [x, y]);
             };
             ScreenView.prototype.updateState = function () { };
             ScreenView.prototype.updateTheme = function () { };
@@ -4052,7 +4058,7 @@ var pxsim;
             key = encodeKey(key);
             var storage = pxsim.board().storedState;
             var prev = storage[key];
-            var val = btoa(U.uint8ArrayToString(buf.data));
+            var val = btoa(pxsim.U.uint8ArrayToString(buf.data));
             var newSize = prev == null
                 ? currSize + key.length + val.length
                 : currSize + val.length - prev.length;
@@ -4083,7 +4089,7 @@ var pxsim;
             var val = storage[key];
             if (val == null)
                 return undefined;
-            return new RefBuffer(U.stringToUint8Array(atob(val)));
+            return new pxsim.RefBuffer(pxsim.U.stringToUint8Array(atob(val)));
         }
         settings._get = _get;
         function _userClean() {
@@ -4103,7 +4109,7 @@ var pxsim;
         }
         settings._userClean = _userClean;
         function _list(prefix) {
-            var r = new RefCollection();
+            var r = new pxsim.RefCollection();
             var emptyPref = encodeKey("");
             for (var _i = 0, _a = prefix[0] == "#" ? allKeys() : userKeys(); _i < _a.length; _i++) {
                 var k = _a[_i];
@@ -4176,7 +4182,7 @@ var pxsim;
         function readAsBuffer(filename) {
             var state = pxsim.storageState();
             var buf = state.files[filename];
-            return buf ? new RefBuffer(Uint8Array.from(buf)) : undefined;
+            return buf ? new pxsim.RefBuffer(Uint8Array.from(buf)) : undefined;
         }
         storage.readAsBuffer = readAsBuffer;
     })(storage = pxsim.storage || (pxsim.storage = {}));

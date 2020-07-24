@@ -2,7 +2,6 @@
 
 * [GitHub](/github)
     * [Getting started](/github/getting-started)
-    * [Sign up](/github/sign-up)
     * [commit](/github/commit)
     * [history](/github/history)
     * [fork](/github/fork)
