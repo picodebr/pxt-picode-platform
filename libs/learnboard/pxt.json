@@ -1,14 +1,6 @@
 {
     "name": "learnboard",
     "description": "The LearnBoard",
-    "files": [
-        "README.md",
-        "device.d.ts",
-        "config.ts",
-        "board.json",
-        "board.svg"
-    ],
-    "core": true,
     "dependencies": {
         "core---samd": "file:../core---samd",
         "buttons": "file:../buttons",
@@ -17,7 +9,15 @@
         "serial": "file:../serial",
         "storage": "file:../storage"
     },
+    "files": [
+        "README.md",
+        "device.d.ts",
+        "config.ts",
+        "board.json",
+        "board.svg"
+    ],
     "public": true,
+    "core": true,
     "compileServiceVariant": "samd21",
     "firmwareUrl": "https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/uf2-bootloader-details#updating-the-bootloader",
     "weight": 100,
