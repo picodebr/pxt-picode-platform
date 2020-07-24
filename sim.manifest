@@ -1,0 +1,10 @@
+CACHE MANIFEST
+
+CACHE:
+/pxt-picode/bluebird.min.js
+/pxt-picode/pxtsim.js
+/pxt-picode/common-sim.js
+/pxt-picode/sim.js
+
+NETWORK:
+*
