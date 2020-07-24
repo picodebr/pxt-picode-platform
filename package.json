@@ -1,7 +1,7 @@
 {
-    "name": "pxt-maker",
-    "version": "0.13.49",
-    "description": "Microsoft MakeCode Maker Boards",
+    "name": "pxt-picode",
+    "version": "0.0.1",
+    "description": "Microsoft MakeCode Pi Code Platform",
     "public": true,
     "keywords": [
         "JavaScript",
@@ -9,15 +9,18 @@
         "maker",
         "pxt",
         "MakeCode",
-        "Microsoft"
+        "Microsoft",
+        "Pi Code",
+        "Pi Project",
+        "Arduino"
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/microsoft/pxt-maker.git"
+        "url": "git+https://github.com/picodebr/pxt-picode.git"
     },
-    "author": "",
+    "author": "Flavian Melquiades Fernandes",
     "license": "MIT",
-    "homepage": "https://github.com/microsoft/pxt-maker#readme",
+    "homepage": "https://github.com/picodebr/pxt-picode#readme",
     "files": [
         "README.md",
         "pxtarget.json",
