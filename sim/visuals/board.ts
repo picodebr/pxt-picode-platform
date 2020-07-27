@@ -250,7 +250,7 @@ namespace pxsim.visuals {
 
         constructor(x: number, y: number, private colorOn: string, private pin: Pin, w: number, h: number) {
             console.log(pin.id);
-            if (NUMS == 0 && pin.id == 2) {
+            if (NUMS == 0 && pin.id == 3) {
                 this.backElement = svg.elt("rect", { x, y, width: w, height: h, fill: this.colorOff });
                 this.ledElement = svg.elt("rect", { x, y, width: w, height: h, fill: this.colorOn, opacity: 0 });
                 NUMS++;
