@@ -60,7 +60,6 @@
         "libs/radio",
         "libs/radio-broadcast",
         "libs/matrix-keypad",
-        "libs/adafruit-metro-m0-express",
         "libs/learnboard"
     ],
     "serial": {

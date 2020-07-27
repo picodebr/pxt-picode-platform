@@ -249,7 +249,8 @@ namespace pxsim.visuals {
         element: SVGElement;
 
         constructor(x: number, y: number, private colorOn: string, private pin: Pin, w: number, h: number) {
-            if (NUMS == 0 && pin.id == 1) {
+            console.log(pin.id);
+            if (NUMS == 0 && pin.id == 2) {
                 this.backElement = svg.elt("rect", { x, y, width: w, height: h, fill: this.colorOff });
                 this.ledElement = svg.elt("rect", { x, y, width: w, height: h, fill: this.colorOn, opacity: 0 });
                 NUMS++;
@@ -321,13 +322,9 @@ namespace pxsim.visuals {
             }) as SVGCircleElement
             svg.title(this.element, def.label);
             // resolve button
-            console.log(def);
-            console.log(def.index);
-            console.log(def.label);
             this.button = def.index !== undefined
                 ? pxsim.pxtcore.getButton(def.index)
                 : pxsim.pxtcore.getButtonByPin(pxsim.pinIds[def.label]);
-            console.log(this.button);
             // hooking up events
             pointerEvents.down.forEach(evid => this.element.addEventListener(evid, ev => {
                 this.button.setPressed(true);

@@ -9,8 +9,8 @@
 @emSize      : 14px;
 @fontSize    : 13px;
 
-@primaryColor: #333333;
-@secondaryColor: @blue;
+@primaryColor: @green;
+@secondaryColor: @grey;
 
 @lightgrey: #808080;
 
@@ -36,11 +36,13 @@
          PXT Overrides
 *******************************/
 
+@homeScreenBackground: @grey;
+
 /*-------------------
    Menu
 --------------------*/
 
-@mainMenuInvertedBackground: @primaryColor;
+@mainMenuInvertedBackground: @grey;
 @mainMenuTutorialBackground: @orange;
 
 @mainMenuBlocksJsToggleColor: @black;
@@ -63,7 +65,7 @@
 @editorToolsBackground: @grey; /*#1e1e1e;*/
 @blocklySvgColor: #4c4b4d; /*#1e1e1e;*/
 
-@blocklyFlyoutColor : #eaeaea;
+@blocklyFlyoutColor : #@green;
 @flyoutLabelColor: #555;
 @monacoFlyoutColor: rgba(40, 40, 40, 0.9);
 @monacoFlyoutText: fade(@white, 70%);
@@ -74,7 +76,7 @@
 --------------------*/
 
 @fullscreenBackgroundGradientStart: @mainMenuInvertedBackground;
-@fullscreenBackgroundGradientEnd: #fff;
+@fullscreenBackgroundGradientEnd: @grey;
 
 /*-------------------
    Side Docs
