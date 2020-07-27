@@ -3,31 +3,6 @@
 ```codecard
 [
     {
-        "name": "Adafruit",
-        "url": "/boards/adafruit",
-        "imageUrl": "/static/libs/adafruit-metro-m0-express.jpg"
-    },
-    {
-        "name": "Arduino",
-        "url": "/boards/arduino",
-        "imageUrl": "/static/libs/arduino-mkr1000.jpg"
-    },
-    {
-        "name": "SparkFun",
-        "url": "/boards/sparkfun",
-        "imageUrl": "/static/libs/sparkfun-redboard-turbo.jpg"
-    },
-    {
-        "name": "XinaBox",
-        "url": "/boards/xinabox",
-        "imageUrl": "/static/libs/xinabox-cc03.jpg"
-    },
-    {
-        "name": "Misc",
-        "url": "/boards/misc",
-        "imageUrl": "/static/libs/robotics-masters-robohatmm1-m4.jpg"
-    },
-    {
         "name": "Digital IO",
         "url": "/projects/digital-io",
         "imageUrl": "/static/projects/digital-io/blinky/gallery.png",
@@ -117,18 +92,13 @@
     {
         "name": "Boards",
         "url": "/boards",
-        "imageUrl": "/static/libs/adafruit-circuit-playground-express.jpg"
+        "imageUrl": "/static/libs/learnboard.jpeg"
     }
 ]
 ```
 
 ## See Also
 
-[Adafruit](/boards/adafruit),
-[Arduino](/boards/arduino),
-[SparkFun](/boards/sparkfun),
-[XinaBox](/boards/xinabox),
-[Misc](/boards/misc),
 [Digital IO](/projects/digital-io),
 [Analog IO](/projects/analog-io),
 [Pixel](/projects/pixel),

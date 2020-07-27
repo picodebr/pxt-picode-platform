@@ -7,29 +7,9 @@ This editor supports various maker boards, based on SAMD21, SAMD51, NRF52.
 ```codecard
 [
     {
-        "name": "Adafruit",
-        "url": "/boards/adafruit",
-        "imageUrl": "/static/libs/adafruit-circuit-playground-express.jpg"
-    },
-    {
-        "name": "Arduino",
-        "url": "/boards/arduino",
-        "imageUrl": "/static/libs/arduino-mkr1300.jpg"  
-    },
-    {
-        "name": "Sparkfun",
-        "url": "/boards/sparkfun",
-        "imageUrl": "/static/libs/sparkfun-samd21-dev-breakout.jpg"  
-    },
-    {
-        "name": "XinaBox",
-        "url": "/boards/xinabox",
-        "imageUrl": "/static/libs/xinabox-cc03.jpg"  
-    },
-    {
-        "name": "Misc",
-        "url": "/boards/misc",
-        "imageUrl": "/static/libs/redbear-ble-nano.jpg"  
+        "name": "LearnBoard",
+        "url": "/boards/learnboard",
+        "imageUrl": "/static/libs/learnboard.jpeg"
     },
     {
         "name": "Add your board",

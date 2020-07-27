@@ -19,15 +19,10 @@
         ]
     },
     "galleries": {
-        "Adafruit": "/boards/adafruit",
-        "Arduino": "/boards/arduino",
-        "SparkFun": "/boards/sparkfun",
-        "XinaBox": "/boards/xinabox",
-        "Misc": "/boards/misc",
         "Digital IO": "/projects/digital-io",
         "Analog IO": "/projects/analog-io",
         "Pixel": "/projects/pixel",
-        "Light": "/projects/light", 
+        "Light": "/projects/light",
         "Music": "/projects/music",
         "Servos": "/projects/servos",
         "HID": "/projects/hid",
