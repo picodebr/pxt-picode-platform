@@ -42,6 +42,7 @@
    Menu
 --------------------*/
 
+@mainMenuBackground: @green;
 @mainMenuInvertedBackground: @grey;
 @mainMenuTutorialBackground: @orange;
 
