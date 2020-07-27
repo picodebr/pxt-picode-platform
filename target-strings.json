@@ -10,11 +10,9 @@
     "A unit test library": "A unit test library",
     "About": "About",
     "Accelerometer": "Accelerometer",
-    "Adafruit": "Adafruit",
     "Adafruit Feather pinout": "Adafruit Feather pinout",
     "Adds new blocks for message communication in the radio category": "Adds new blocks for message communication in the radio category",
     "Analog IO": "Analog IO",
-    "Arduino": "Arduino",
     "Azure IoT - beta": "Azure IoT - beta",
     "Basic display functionalitites": "Basic display functionalitites",
     "Bit Radio": "Bit Radio",
@@ -41,7 +39,6 @@
     "LoRa": "LoRa",
     "MQTT for MakeCode - beta": "MQTT for MakeCode - beta",
     "MakeCode Pi Code": "MakeCode Pi Code",
-    "Misc": "Misc",
     "Mouse emulation over HID": "Mouse emulation over HID",
     "Music": "Music",
     "Networking abstractions": "Networking abstractions",
@@ -57,9 +54,7 @@
     "Servos": "Servos",
     "Settings storage in files": "Settings storage in files",
     "Settings storage in internal flash": "Settings storage in internal flash",
-    "SparkFun": "SparkFun",
     "Storage": "Storage",
-    "Support for Adafruit Metro M0 Express": "Support for Adafruit Metro M0 Express",
     "Support for FXOS8700 accelerometer.": "Support for FXOS8700 accelerometer.",
     "Support for LIS3DH accelerometer.": "Support for LIS3DH accelerometer.",
     "Support for MMA8453 accelerometer.": "Support for MMA8453 accelerometer.",
@@ -79,6 +74,5 @@
     "Tiny data logging framework": "Tiny data logging framework",
     "UART communication": "UART communication",
     "USB Pen-drive support and flash storage": "USB Pen-drive support and flash storage",
-    "WiFi support in Arcade - beta": "WiFi support in Arcade - beta",
-    "XinaBox": "XinaBox"
+    "WiFi support in Arcade - beta": "WiFi support in Arcade - beta"
 }

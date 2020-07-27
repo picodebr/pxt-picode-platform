@@ -3,7 +3,7 @@
     "dir": "ltr",
     "name": "MakeCode Pi Code",
     "short_name": "picode",
-    "background_color": "#ffffff",
+    "background_color": "#808080",
     "icons": [
         {
             "src": "@cdnUrl@/blob/8247888df0dad13f24ed827806413090fc64315a/static/icons/android-chrome-192x192.png",
@@ -20,5 +20,5 @@
     "start_url": "/",
     "display": "standalone",
     "orientation": "landscape",
-    "theme_color": "#ecf0f1"
+    "theme_color": "#33cc66"
 }

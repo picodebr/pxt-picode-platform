@@ -251,7 +251,7 @@
     "ignoreDocsErrors": true,
     "uploadDocs": true,
     "versions": {
-        "target": "0.0.7",
+        "target": "0.0.8",
         "pxt": "6.1.18"
     },
     "blocksprj": {
@@ -259,7 +259,7 @@
         "config": {
             "name": "{0}",
             "dependencies": {
-                "adafruit-metro-m0-express": "*"
+                "learnboard": "*"
             },
             "description": "",
             "files": [
@@ -280,7 +280,7 @@
         "config": {
             "name": "{0}",
             "dependencies": {
-                "adafruit-metro-m0-express": "*"
+                "learnboard": "*"
             },
             "description": "",
             "files": [

@@ -413,7 +413,8 @@ var pxsim;
                 this.colorOn = colorOn;
                 this.pin = pin;
                 this.colorOff = "#aaa";
-                if (NUMS == 0 && pin.id == 1) {
+                console.log(pin.id);
+                if (NUMS == 0 && pin.id == 3) {
                     this.backElement = svg.elt("rect", { x: x, y: y, width: w, height: h, fill: this.colorOff });
                     this.ledElement = svg.elt("rect", { x: x, y: y, width: w, height: h, fill: this.colorOn, opacity: 0 });
                     NUMS++;
@@ -477,13 +478,9 @@ var pxsim;
                 });
                 svg.title(this.element, def.label);
                 // resolve button
-                console.log(def);
-                console.log(def.index);
-                console.log(def.label);
                 this.button = def.index !== undefined
                     ? pxsim.pxtcore.getButton(def.index)
                     : pxsim.pxtcore.getButtonByPin(pxsim.pinIds[def.label]);
-                console.log(this.button);
                 // hooking up events
                 pxsim.pointerEvents.down.forEach(function (evid) { return _this.element.addEventListener(evid, function (ev) {
                     _this.button.setPressed(true);

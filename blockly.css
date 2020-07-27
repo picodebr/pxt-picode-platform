@@ -330,6 +330,7 @@
 @editorToolsBackground: @grey;
 /*#1e1e1e;*/
 /*#1e1e1e;*/
+@blockly FlyoutColor : #@green;
 /*-------------------
    Full screen
 --------------------*/
@@ -877,10 +878,10 @@ body.blocklyMinimalBody {
   fill: transparent !important;
 }
 .blocklyFlyoutButton:hover {
-  fill: #333333 !important;
+  fill: #33cc66 !important;
 }
 .blocklyFlyoutButtonBackground {
-  stroke: #333333 !important;
+  stroke: #33cc66 !important;
   stroke-width: 3px !important;
 }
 .blocklyFlyoutButton .blocklyText {
@@ -909,7 +910,7 @@ line.blocklyFlyoutLine {
 }
 /* Opacity of blockly flyout background */
 path.blocklyFlyoutBackground {
-  fill: #eaeaea !important;
+  fill: #333333 !important;
   fill-opacity: 0.9 !important;
 }
 /*******************************
