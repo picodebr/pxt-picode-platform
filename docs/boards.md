@@ -10,7 +10,7 @@ This editor supports various maker boards, based on SAMD21, SAMD51, NRF52.
         "name": "LearnBoard",
         "url": "/boards/learnboard",
         "cardType": "template",
-        "imageUrl": "docs/static/libs/learnboard.jpeg"
+        "imageUrl": "./docs/static/libs/learnboard.jpeg"
     },
     {
         "name": "Add your board",
