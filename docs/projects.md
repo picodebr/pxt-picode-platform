@@ -12,9 +12,9 @@
     {
         "name": "Analog IO",
         "url": "/projects/analog-io",
-        "imageUrl": "/static/projects/analog-io/blink-to-light/gallery.png",
-        "largeImageUrl": "/static/projects/analog-io/blink-to-light/gallery.gif",
-        "videoUrl": "/static/projects/analog-io/blink-to-light/gallery.mp4"
+        "imageUrl": "./docs/static/projects/analog-io/blink-to-light/gallery.png",
+        "largeImageUrl": "./docs/static/projects/analog-io/blink-to-light/gallery.gif",
+        "videoUrl": "./docs/static/projects/analog-io/blink-to-light/gallery.mp4"
     },
     {
         "name": "Pixel",
@@ -92,7 +92,7 @@
     {
         "name": "Boards",
         "url": "/boards",
-        "imageUrl": "/static/libs/learnboard.jpeg"
+        "imageUrl": "./docs/static/libs/learnboard.jpeg"
     }
 ]
 ```
