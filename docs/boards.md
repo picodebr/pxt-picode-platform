@@ -15,7 +15,7 @@ This editor supports various maker boards, based on SAMD21, SAMD51, NRF52.
     {
         "name": "Add your board",
         "url": "/boards/add-a-new-board",
-        "imageUrl": "/docs/static/libs/bead-servo.jpg"
+        "imageUrl": "./docs/static/libs/bead-servo.jpg"
     }
 ]
 ```

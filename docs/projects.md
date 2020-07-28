@@ -5,9 +5,9 @@
     {
         "name": "Digital IO",
         "url": "/projects/digital-io",
-        "imageUrl": "/docs/static/projects/digital-io/blinky/gallery.png",
-        "largeImageUrl": "/docs/static/projects/digital-io/blinky/gallery.gif",
-        "videoUrl": "/docs/static/projects/digital-io/blinky/gallery.mp4"
+        "imageUrl": "./docs/static/projects/digital-io/blinky/gallery.png",
+        "largeImageUrl": "./docs/static/projects/digital-io/blinky/gallery.gif",
+        "videoUrl": "./docs/static/projects/digital-io/blinky/gallery.mp4"
     },
     {
         "name": "Analog IO",
@@ -19,30 +19,30 @@
     {
         "name": "Pixel",
         "url": "/projects/pixel",
-        "imageUrl": "/docs/static/projects/pixel/blinky/gallery.png",
-        "largeImageUrl": "/docs/static/projects/pixel/blinky/gallery.gif",
-        "videoUrl": "/docs/static/projects/pixel/blinky/gallery.mp4"
+        "imageUrl": "./docs/static/projects/pixel/blinky/gallery.png",
+        "largeImageUrl": "./docs/static/projects/pixel/blinky/gallery.gif",
+        "videoUrl": "./docs/static/projects/pixel/blinky/gallery.mp4"
     },
     {
         "name": "Light",
         "url": "/projects/light",
-        "imageUrl": "/docs/static/projects/light/rainbow/gallery.png",
-        "largeImageUrl": "/docs/static/projects/light/rainbow/gallery.gif",
-        "videoUrl": "/docs/static/projects/light/rainbow/gallery.mp4"
+        "imageUrl": "./docs/static/projects/light/rainbow/gallery.png",
+        "largeImageUrl": "./docs/static/projects/light/rainbow/gallery.gif",
+        "videoUrl": "./docs/static/projects/light/rainbow/gallery.mp4"
     },
     {
         "name": "Music",
         "url": "/projects/music",
-        "imageUrl": "/docs/static/projects/music/play-sound/gallery.png",
-        "largeImageUrl": "/docs/static/projects/music/play-sound/gallery.gif",
-        "videoUrl": "/docs/static/projects/music/play-sound/gallery.mp4"
+        "imageUrl": "./docs/static/projects/music/play-sound/gallery.png",
+        "largeImageUrl": "./docs/static/projects/music/play-sound/gallery.gif",
+        "videoUrl": "./docs/static/projects/music/play-sound/gallery.mp4"
     },
     {
         "name": "Servos",
         "url": "/projects/servos",
-        "imageUrl": "/docs/static/projects/servos/sweep/gallery.png",
-        "largeImageUrl": "/docs/static/projects/servos/sweep/gallery.gif",
-        "videoUrl": "/docs/static/projects/servos/sweep/gallery.mp4"
+        "imageUrl": "./docs/static/projects/servos/sweep/gallery.png",
+        "largeImageUrl": "./docs/static/projects/servos/sweep/gallery.gif",
+        "videoUrl": "./docs/static/projects/servos/sweep/gallery.mp4"
     },
     {
         "name": "HID",
@@ -51,16 +51,16 @@
     {
         "name": "Screen",
         "url": "/projects/screen",
-        "imageUrl": "/docs/static/projects/screen/console/gallery.png",
-        "largeImageUrl": "/docs/static/projects/screen/console/gallery.gif",
-        "videoUrl": "/docs/static/projects/screen/console/gallery.mp4"
+        "imageUrl": "./docs/static/projects/screen/console/gallery.png",
+        "largeImageUrl": "./docs/static/projects/screen/console/gallery.gif",
+        "videoUrl": "./docs/static/projects/screen/console/gallery.mp4"
     },
     {
         "name": "Accelerometer",
         "url": "/projects/accelerometer",
-        "imageUrl": "/docs/static/projects/accelerometer/shake/gallery.png",
-        "largeImageUrl": "/docs/static/projects/accelerometer/shake/gallery.gif",
-        "videoUrl": "/docs/static/projects/accelerometer/shake/gallery.mp4"
+        "imageUrl": "./docs/static/projects/accelerometer/shake/gallery.png",
+        "largeImageUrl": "./docs/static/projects/accelerometer/shake/gallery.gif",
+        "videoUrl": "./docs/static/projects/accelerometer/shake/gallery.mp4"
     },
     {
         "name": "Serial",
@@ -73,9 +73,9 @@
     {
         "name": "LCD",
         "url": "/projects/lcd",
-        "imageUrl": "/docs/static/projects/lcd/hello-world/gallery.png",
-        "largeImageUrl": "/docs/static/projects/lcd/hello-world/gallery.gif",
-        "videoUrl": "/docs/static/projects/lcd/hello-world/gallery.mp4"
+        "imageUrl": "./docs/static/projects/lcd/hello-world/gallery.png",
+        "largeImageUrl": "./docs/static/projects/lcd/hello-world/gallery.gif",
+        "videoUrl": "./docs/static/projects/lcd/hello-world/gallery.mp4"
     },
     {
         "name": "LoRa",
