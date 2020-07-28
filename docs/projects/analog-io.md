@@ -17,18 +17,18 @@
     {
         "name": "Glowy",
         "url": "/projects/analog-io/glowy",
-        "imageUrl": "/static/projects/analog-io/glowy/gallery.png",
-        "largeImageUrl": "/static/projects/analog-io/glowy/gallery.gif",
-        "videoUrl": "/static/projects/analog-io/glowy/gallery.mp4",
+        "imageUrl": "./docs/static/projects/analog-io/glowy/gallery.png",
+        "largeImageUrl": "./docs/static/projects/analog-io/glowy/gallery.gif",
+        "videoUrl": "./docs/static/projects/analog-io/glowy/gallery.mp4",
         "cardType": "example",
         "otherActions": []
     },
     {
         "name": "Glow Light",
         "url": "/projects/analog-io/glow-light",
-        "imageUrl": "/static/projects/analog-io/glowy/gallery.png",
-        "largeImageUrl": "/static/projects/analog-io/glowy/gallery.gif",
-        "videoUrl": "/static/projects/analog-io/glowy/gallery.mp4",
+        "imageUrl": "./docs/static/projects/analog-io/glowy/gallery.png",
+        "largeImageUrl": "./docs/static/projects/analog-io/glowy/gallery.gif",
+        "videoUrl": "./docs/static/projects/analog-io/glowy/gallery.mp4",
         "cardType": "example",
         "otherActions": []
     }
