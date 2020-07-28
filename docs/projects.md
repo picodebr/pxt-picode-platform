@@ -92,7 +92,7 @@
     {
         "name": "Boards",
         "url": "/boards",
-        "imageUrl": "static/libs/learnboard.jpeg"
+        "imageUrl": "docs/static/libs/learnboard.jpeg"
     }
 ]
 ```
