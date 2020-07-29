@@ -35,7 +35,7 @@
 <link rel="apple-touch-icon" href="">
 <link rel="icon" type="image/png" href="">
 <link rel="shortcut icon" href="">
-<meta name="theme-color" content="#33cc66">
+<meta name="theme-color" content="#333">
 
 <!-- end include meta.html -->
 
@@ -58,8 +58,8 @@
 
 <style>
     
-.ui.accent { color: #33cc66; }
-.ui.inverted.accent { background: #33cc66; }
+.ui.accent { color: #333; }
+.ui.inverted.accent { background: #333; }
 
 </style>
 
@@ -100,7 +100,7 @@
         <div class="item">
             <form id="tocsearch1" class="search" role="form" method="get" action="https://www.bing.com/search">
                 <div class="ui fluid icon input">
-                    <input type="hidden" name="q1" value="site:https://maker.makecode.com/" />
+                    <input type="hidden" name="q1" value="site:https://picodebr.github.io/pxt-picode/" />
                     
                 <input type="search" name="q" placeholder="Search..." aria-label="Search Documentation">
                 <i onclick="document.getElementById('tocsearch1').submit();" tabindex="0" class="search link icon" aria-label="Search" role="button"></i>
@@ -413,7 +413,7 @@ A quick solution is take screenshots of the snippets but that approach can quick
 <li>add the following entry in the <code>_config.yml</code></li>
 </ul>
 <pre><code>  makecode:
-    home_url: https://maker.makecode.com/</code></pre><ul>
+    home_url: https://picodebr.github.io/pxt-picode/</code></pre><ul>
 <li>copy the following text at the bottom of your <code>README.md</code> file<pre><code>&lt;script src=&quot;https://makecode.com/gh-pages-embed.js&quot;&gt;&lt;/script&gt;&lt;script&gt;makeCodeRender(&quot;{{ site.makecode.home_url }}&quot;, &quot;{{ site.github.owner_name }}/{{ site.github.repository_name }}&quot;);&lt;/script&gt;</code></pre></li>
 </ul>
 <h2 id="other-plugins">Other Plugins</h2><p>Here is an integration sample:</p>
@@ -515,7 +515,7 @@ basic.showString(&quot;Hello World&quot;)
         type: &quot;renderblocks&quot;,
         id: pre.id,
         code: pre.innerText
-    }, &quot;https://maker.makecode.com/&quot;);
+    }, &quot;https://picodebr.github.io/pxt-picode/&quot;);
 }</code></pre>
 <h3 id="create-the-iframe-renderer">Create the <code>iframe</code> renderer</h3><p>Finally, the rendering <code>iframe</code> is added to the HTML DOM and is hidden so that it does not interfere with the outer document page.</p>
 <pre><code class="lang-typescript-ignore">function makeCodeInjectRenderer() {
@@ -526,7 +526,7 @@ basic.showString(&quot;Hello World&quot;)
     f.style.bottom = 0;
     f.style.width = &quot;1px&quot;;
     f.style.height = &quot;1px&quot;;            
-    f.src = &quot;https://maker.makecode.com/--docs?render=1&quot;
+    f.src = &quot;https://picodebr.github.io/pxt-picode/--docs?render=1&quot;
     document.body.appendChild(f);
 }
 
@@ -594,7 +594,7 @@ for (let i = 0; i &lt; 10; i++) {
 &lt;/div&gt;
 
 &lt;script&gt;
-var makecodeUrl = &quot;https://maker.makecode.com/&quot;;
+var makecodeUrl = &quot;https://picodebr.github.io/pxt-picode/&quot;;
 var blocksClass = &quot;blocks&quot;;
 
 var injectRenderer = function () {
@@ -616,7 +616,7 @@ function makeCodeRenderPre(pre) {
         type: &quot;renderblocks&quot;,
         id: pre.id,
         code: pre.innerText
-    }, &quot;https://maker.makecode.com/&quot;);
+    }, &quot;https://picodebr.github.io/pxt-picode/&quot;);
 }
 
 var attachBlocksListener = function () {
@@ -667,7 +667,7 @@ leave the <code>code</code> attribute empty and pass the shared project id in a 
     options: {
         packageId: pre.getAttribute(&quot;data-packageid&quot;)
     }
-}, &quot;https://maker.makecode.com/&quot;);</code></pre><ul>
+}, &quot;https://picodebr.github.io/pxt-picode/&quot;);</code></pre><ul>
 <li><a target="_blank" rel="nofollow noopener" href="https://jsfiddle.net/L8msdjpu/3/">HTML only</a></li>
 </ul>
 <h2 id="lazy-loading">Lazy loading</h2><p>You can detect whether you have any snippet on your page before loading the rendering <code>iframe</code>.</p>

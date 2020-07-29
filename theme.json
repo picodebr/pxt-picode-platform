@@ -1,23 +1,23 @@
 {
-    "accentColor": "#33cc66",
+    "accentColor": "#333",
     "backgroundColor": "#808080",
-    "logoUrl": "https://github.com/microsoft/pxt-maker",
+    "logoUrl": "http://www.picode.com.br/",
     "logo": "docs/static/logo.svg",
     "docsLogo": "docs/static/logo.svg",
     "docsHeader": "Pi Code Platform",
     "portraitLogo": "docs/static/logo.svg",
     "footerLogo": "docs/static/logo.svg",
-    "organization": "Pi Code Education",
+    "organization": "Microsoft",
     "organizationUrl": "https://makecode.com/",
     "organizationLogo": "docs/static/Microsoft-logo_rgb_c-gray-square.png",
     "organizationWideLogo": "docs/static/Microsoft-logo_rgb_c-gray.png",
-    "homeUrl": "https://maker.makecode.com/",
-    "embedUrl": "https://maker.makecode.com/",
+    "homeUrl": "https://picodebr.github.io/pxt-picode/",
+    "embedUrl": "https://picodebr.github.io/pxt-picode/",
     "privacyUrl": "https://go.microsoft.com/fwlink/?LinkId=521839",
     "termsOfUseUrl": "https://go.microsoft.com/fwlink/?LinkID=206977",
-    "githubUrl": "https://github.com/microsoft/pxt-maker",
+    "githubUrl": "https://github.com/picodebr/pxt-picode",
     "feedbackUrl": "https://forum.makecode.com/",
-    "betaUrl": "https://github.com/microsoft/pxt-maker",
+    "betaUrl": "https://github.com/picodebr/pxt-picode",
     "boardName": "board",
     "homeScreenHero": "docs/static/hero.png",
     "debugger": true,
@@ -52,12 +52,12 @@
         },
         {
             "name": "GitHub",
-            "path": "https://github.com/microsoft/pxt-maker"
+            "path": "https://github.com/picodebr/pxt-picode"
         }
     ],
     "invertedMenu": false,
-    "invertedToolbox": false,
-    "invertedMonaco": false,
+    "invertedToolbox": true,
+    "invertedMonaco": true,
     "monacoToolbox": true,
     "highContrast": true,
     "greenScreen": true,
@@ -86,6 +86,10 @@
         "advanced": "#00272B",
         "functions": "#005a9e",
         "arrays": "#8A1C7C"
+    },
+    "blocklyColors": {
+        "insertionMarker": "#FFFFFF",
+        "insertionMarkerOpacity": 0.5
     },
     "allowPackageExtensions": true,
     "crowdinProject": "kindscript",

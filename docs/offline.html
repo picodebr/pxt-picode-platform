@@ -35,7 +35,7 @@
 <link rel="apple-touch-icon" href="">
 <link rel="icon" type="image/png" href="">
 <link rel="shortcut icon" href="">
-<meta name="theme-color" content="#33cc66">
+<meta name="theme-color" content="#333">
 
 <!-- end include meta.html -->
 
@@ -58,8 +58,8 @@
 
 <style>
     
-.ui.accent { color: #33cc66; }
-.ui.inverted.accent { background: #33cc66; }
+.ui.accent { color: #333; }
+.ui.inverted.accent { background: #333; }
 
 </style>
 
@@ -100,7 +100,7 @@
         <div class="item">
             <form id="tocsearch1" class="search" role="form" method="get" action="https://www.bing.com/search">
                 <div class="ui fluid icon input">
-                    <input type="hidden" name="q1" value="site:https://maker.makecode.com/" />
+                    <input type="hidden" name="q1" value="site:https://picodebr.github.io/pxt-picode/" />
                     
                 <input type="search" name="q" placeholder="Search..." aria-label="Search Documentation">
                 <i onclick="document.getElementById('tocsearch1').submit();" tabindex="0" class="search link icon" aria-label="Search" role="button"></i>
@@ -397,9 +397,9 @@
 					</button>
 					
     <div class="ui text">
-        <h1 id="using-makecode-offline">Using MakeCode offline</h1><p>MakeCode is typically accessed at <a target="_blank" rel="nofollow noopener" href="https://maker.makecode.com/">https://maker.makecode.com/</a> where create, modify, and run your projects while you’re online. You can can use  MakeCode when you’re offline too. Here are some ways you can work with MakeCode offline:</p>
-<h2 id="target-app"></h2><h2 id="web-application">Web application</h2><p><strong><a target="_blank" rel="nofollow noopener" href="https://maker.makecode.com/">MakeCode</a></strong> is an <strong>HTML5 web application</strong> that’s automatically cached locally (saved to your computer or device) when first viewed in your browser. After the web app has loaded you will have everything you need to continue working without an internet connection. If you decide to add an <a  rel="nofollow noopener" href="/pxt-picode/docs/extensions.html">extension</a>, it’s possible that you’ll again need to connect to the internet to allow the code in the new extension to compile.</p>
-<h3 id="how-does-it-work-">How does it work?</h3><p>The MakeCode editor, like other web applications, is created using HTML, JavaScript, and some style information. These parts of the editor are all downloaded as various files to your browser. The editor is designed to do as much of work as possible in the browser itself without needing to constantly have contact with the web server. To do this, it asks the browser to download and keep a number of service files which give the editor the same features provided by the <strong><a target="_blank" rel="nofollow noopener" href="https://maker.makecode.com/">MakeCode</a></strong> web site. This allows the editor to fully function even when disconnected from the internet, no longer having contact with the web site.</p>
+        <h1 id="using-makecode-offline">Using MakeCode offline</h1><p>MakeCode is typically accessed at <a target="_blank" rel="nofollow noopener" href="https://picodebr.github.io/pxt-picode/">https://picodebr.github.io/pxt-picode/</a> where create, modify, and run your projects while you’re online. You can can use  MakeCode when you’re offline too. Here are some ways you can work with MakeCode offline:</p>
+<h2 id="target-app"></h2><h2 id="web-application">Web application</h2><p><strong><a target="_blank" rel="nofollow noopener" href="https://picodebr.github.io/pxt-picode/">MakeCode</a></strong> is an <strong>HTML5 web application</strong> that’s automatically cached locally (saved to your computer or device) when first viewed in your browser. After the web app has loaded you will have everything you need to continue working without an internet connection. If you decide to add an <a  rel="nofollow noopener" href="/pxt-picode/docs/extensions.html">extension</a>, it’s possible that you’ll again need to connect to the internet to allow the code in the new extension to compile.</p>
+<h3 id="how-does-it-work-">How does it work?</h3><p>The MakeCode editor, like other web applications, is created using HTML, JavaScript, and some style information. These parts of the editor are all downloaded as various files to your browser. The editor is designed to do as much of work as possible in the browser itself without needing to constantly have contact with the web server. To do this, it asks the browser to download and keep a number of service files which give the editor the same features provided by the <strong><a target="_blank" rel="nofollow noopener" href="https://picodebr.github.io/pxt-picode/">MakeCode</a></strong> web site. This allows the editor to fully function even when disconnected from the internet, no longer having contact with the web site.</p>
 <p>When the editor loads in your browser it tells it to keep the MakeCode service files in the browser’s <em>application cache</em>. The cache is data storage area managed by the browser where a web application can keep additional files it needs.</p>
 <h3 id="cloud-compilation">Cloud compilation</h3><p>When running on actual hardware, the code you write in JavaScript is compiled into instructions which are understood by the processor on the board. Some of the files saved in the application cache are compiled code for the features on the board. To use the hardware features on your board, the editor provides blocks for them that you include in your programs. These blocks are available to your program when they’re included as part of an added extension. The code in an extension is in TypeScript and sometimes also in C++. It’s necessary to compile this code at least once on the server and then have the compiled files returned to the browser to get cached. Once cached, the editor can use them together with your code, even when offline. This one time compile process is called cloud compilation.</p>
 <h2 id="extensions">Extensions </h2><p>Extensions are, by default, downloaded from internet so typically you need to be connected to use them. If you want to use a particular extension while <strong>offline</strong>, you will need to follow these steps:</p>
@@ -420,7 +420,7 @@
 
         </div>
     </div>
-<h2 id="local-serve">Hosting MakeCode locally </h2><p>The open source editions of MakeCode can be served locally on your own computer. More experienced users can download the entire <a target="_blank" rel="nofollow noopener" href="https://github.com/microsoft/pxt">PXT Toolchain</a> and use the <a  rel="nofollow noopener" href="/pxt-picode/docs/cli.html">command line interface</a> (CLI) to compile and deploy scripts locally. PXT provides a great out-of-the-box experience when used with <a  rel="nofollow noopener" href="/pxt-picode/docs/code.html">Visual Studio Code</a>, a lightweight cross-platform code editor. See the <a target="_blank" rel="nofollow noopener" href="https://github.com/microsoft/pxt-maker">https://github.com/microsoft/pxt-maker</a> project page for instructions on setting up a MakeCode local server.</p>
+<h2 id="local-serve">Hosting MakeCode locally </h2><p>The open source editions of MakeCode can be served locally on your own computer. More experienced users can download the entire <a target="_blank" rel="nofollow noopener" href="https://github.com/microsoft/pxt">PXT Toolchain</a> and use the <a  rel="nofollow noopener" href="/pxt-picode/docs/cli.html">command line interface</a> (CLI) to compile and deploy scripts locally. PXT provides a great out-of-the-box experience when used with <a  rel="nofollow noopener" href="/pxt-picode/docs/code.html">Visual Studio Code</a>, a lightweight cross-platform code editor. See the <a target="_blank" rel="nofollow noopener" href="https://github.com/picodebr/pxt-picode">https://github.com/picodebr/pxt-picode</a> project page for instructions on setting up a MakeCode local server.</p>
 
     </div>
 
