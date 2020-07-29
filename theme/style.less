@@ -26,11 +26,11 @@
 *******************************/
 
 .ui.button.download-button {
-    &:extend(.ui.secondary.button all);
+    &:extend(.ui.green.button all);
 }
 
 .ui.button.editortools-btn {
-    &:extend(.ui.blue.button all);
+    &:extend(.ui.green.button all);
 }
 
 .projectname-input {
@@ -42,11 +42,11 @@
 }
 
 .ui.button.exit-tutorial-btn {
-    &:extend(.ui.blue.button all);
+    &:extend(.ui.green.button all);
 }
 
 .restart-button, .play-button, .collapse-button, .mute-button:not(.red), .debug-button:not(.orange), .trace-button:not(.orange), .fullscreen-button  {
-    background-color: #333333 !important;
+    background-color: @lightgrey !important;
 }
 
 /* Editor menu toggle */
@@ -57,6 +57,23 @@
 
 .sandboxfooter a:not(.thin) {
     color:white !important;
+}
+
+.ui.home.projectsdialog {
+    .tabsegment  {
+        padding-top: 0 !important;
+    }
+    .ui.menu {
+        background: #333333;
+        border: 0px;
+        background: linear-gradient(to bottom, #33cc66, #333333);
+    }
+    .getting-started-segment {
+        margin-top: 3rem !important;
+        background-position: 50% 75%;
+        background-color: #333333; /*#7DFFF8;*/
+        background-size: contain;
+    }
 }
 
 /* Scrollbars */
@@ -71,6 +88,11 @@
 @media only screen and (max-width: @largestMobileScreen) {
     #filelist {
         background: transparent;
+    }
+    .ui.home.projectsdialog {
+        .getting-started-segment {
+            background-size: contain;
+        }
     }
 }
 

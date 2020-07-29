@@ -2,5 +2,4 @@
     User Variable Overrides
 *******************************/
 
-
-@background: @green;
+@background: @primaryColor;

@@ -279,7 +279,7 @@
         }
     },
     "appTheme": {
-        "accentColor": "#33cc66",
+        "accentColor": "#333",
         "backgroundColor": "#808080",
         "logoUrl": "https://github.com/microsoft/pxt-maker",
         "logo": "./static/logo.svg",
@@ -336,7 +336,7 @@
             }
         ],
         "invertedMenu": false,
-        "invertedToolbox": false,
+        "invertedToolbox": true,
         "invertedMonaco": false,
         "monacoToolbox": true,
         "highContrast": true,
@@ -366,6 +366,10 @@
             "advanced": "#00272B",
             "functions": "#005a9e",
             "arrays": "#8A1C7C"
+        },
+        "blocklyColors": {
+            "insertionMarker": "#FFFFFF",
+            "insertionMarkerOpacity": 0.5
         },
         "allowPackageExtensions": true,
         "crowdinProject": "kindscript",

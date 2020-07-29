@@ -36,8 +36,6 @@
          PXT Overrides
 *******************************/
 
-@homeScreenBackground: @grey;
-
 /*-------------------
    Menu
 --------------------*/
@@ -54,7 +52,7 @@
    Layout
 --------------------*/
 
-@sideBarWidth: 22rem;
+@sideBarWidth: 23rem;
 @simulatorWidth: 24rem;
 @simulatorWidthSmall: 20rem;
 
@@ -62,11 +60,11 @@
    Background
 --------------------*/
 
-@simulatorBackground: @grey
-@editorToolsBackground: @grey; /*#1e1e1e;*/
-@blocklySvgColor: #4c4b4d; /*#1e1e1e;*/
+@simulatorBackground: @grey;
+@editorToolsBackground: @simulatorBackground;
+@blocklySvgColor: #4c4b4d;
 
-@blocklyFlyoutColor : #@green;
+@blocklyFlyoutColor : @green;
 @flyoutLabelColor: #555;
 @monacoFlyoutColor: rgba(40, 40, 40, 0.9);
 @monacoFlyoutText: fade(@white, 70%);
@@ -77,11 +75,13 @@
 --------------------*/
 
 @fullscreenBackgroundGradientStart: @mainMenuInvertedBackground;
-@fullscreenBackgroundGradientEnd: @grey;
+@fullscreenBackgroundGradientEnd: @green;
 
 /*-------------------
    Side Docs
 --------------------*/
+
+@mainMenuHeight: 3.0rem;
 
 @sidedocsButtonsTop: (@mainMenuHeight + 1rem);
 @sidedocsButtonsRight: 4.25rem;
@@ -90,7 +90,7 @@
    Editor
 --------------------*/
 
-@blocklyToolboxColor: transparent;
+@blocklyToolboxColor: lighten(@grey, 10%);
 @trashIconColor: @primaryColor;
 
 
@@ -104,8 +104,33 @@
 @blocklyScrollbarColor: #000;
 @blocklyScrollbarOpacity: 0.8;
 
+@blocklyToolboxText: @green;
+
+/*-------------------
+   Home screen
+--------------------*/
+@homeScreenBackground: @grey;
+
+@homeCardBackgroundColor: @green;
+@homeHeaderColor: white;
+@homeCardColor: #000;
+@homeCardBorderRadius: 5px;
+@homeCardBorderSize: 2px;
+@homeCardBorderColor: lighten(@green, 10%);
+@homeCardHoverBorderColor: darken(@green, 10%);
+@homeCardImageBorderRadius: 5px;
+
 /*-------------------
    Greenscreen
 --------------------*/
 
 @greenScreenBlockColor: #40bf4a;
+
+/*-------------------
+   Flyout
+--------------------*/
+
+@flyoutLabelColor: white;
+@blocklyFlyoutColor: #292F36;
+@blocklyFlyoutColorOpacity: 0.9;
+@monacoFlyoutColor: fade(@blocklyFlyoutColor, 90%);
