@@ -1,13 +1,14 @@
 namespace config {
     export const NUM_NEOPIXELS = 1;
-    export const PIN_NEOPIXEL = DAL.PA01;
+    export const PIN_NEOPIXEL = DAL.PB23;
 
-    export const PIN_LED = DAL.PA03;
+    export const PIN_LED = DAL.PA17;
     export const PIN_LED1 = PIN_LED;
-    export const PIN_LED2 = DAL.PA04;
-    export const PIN_LED3 = DAL.PA05;
-    export const PIN_LED4 = DAL.PA06;
-    export const PIN_LED5 = DAL.PA07;
+    export const PIN_LED2 = DAL.PA18;
+    export const PIN_LED3 = DAL.PA19;
+    export const PIN_LED4 = DAL.PA20;
+    export const PIN_LED5 = DAL.PA21;
+    export const PIN_SPEAKER_AMP = DAL.PA30;
 
     // unknown pin id A4_SDA
     export const PIN_A4 = DAL.PA08;

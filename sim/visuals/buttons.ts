@@ -36,7 +36,7 @@ namespace pxsim.visuals {
 
         }
 
-        public updateTheme() {}
+        public updateTheme() { }
 
         private mkBtn() {
             this.btn = mkBtnSvg([0, 0]).el;
@@ -55,7 +55,7 @@ namespace pxsim.visuals {
                 const txtYOff = PIN_DIST / 10;
 
                 let btng = <SVGGElement>svg.elt("g");
-                let btn = svg.child(btng, "rect", { class: "sim-button-virtual", x: x, y: y, rx: corner, ry: corner, width: w, height: w});
+                let btn = svg.child(btng, "rect", { class: "sim-button-virtual", x: x, y: y, rx: corner, ry: corner, width: w, height: w });
                 let btnTxt = mkTxt(cx + txtXOff, cy + txtYOff, txtSize, 0, "A+B");
                 pxsim.U.addClass(btnTxt, "sim-text")
                 pxsim.U.addClass(btnTxt, "sim-text-virtual");

@@ -121,8 +121,8 @@
     "compile": {
         "isNative": true,
         "useUF2": true,
-        "webUSB": true,
-        "hasHex": true,
+        "webUSB": false,
+        "hasHex": false,
         "saveAsPNG": true,
         "deployDrives": ".*",
         "deployFileMarker": "INFO_UF2.TXT",
@@ -173,7 +173,7 @@
     "variants": {
         "samd51": {
             "compile": {
-                "hasHex": true,
+                "hasHex": false,
                 "openocdScript": "source [find interface/cmsis-dap.cfg]; set CHIPNAME at91samd51g19; source [find target/atsame5x.cfg]",
                 "openocdScriptAlt": "source [find interface/stlink-v2.cfg]; set CPUTAPID 0x2ba01477; set CHIPNAME at91samd51g19; source [find target/at91samdXX.cfg]",
                 "ramSize": 196608,
@@ -261,7 +261,7 @@
         },
         "samd21": {
             "compile": {
-                "hasHex": true,
+                "hasHex": false,
                 "openocdScript": "source [find interface/cmsis-dap.cfg]; set CHIPNAME at91samd21g18; source [find target/at91samdXX.cfg]",
                 "openocdScriptAlt": "source [find interface/stlink-v2.cfg]; set CPUTAPID 0x0bc11477; set CHIPNAME at91samd21g18; source [find target/at91samdXX.cfg]",
                 "uf2Family": "0x68ed2b88"
@@ -281,23 +281,23 @@
     "appTheme": {
         "accentColor": "#333",
         "backgroundColor": "#808080",
-        "logoUrl": "https://github.com/microsoft/pxt-maker",
+        "logoUrl": "http://www.picode.com.br/",
         "logo": "./static/logo.svg",
         "docsLogo": "./static/logo.svg",
         "docsHeader": "Pi Code Platform",
         "portraitLogo": "./static/logo.svg",
         "footerLogo": "./static/logo.svg",
-        "organization": "Pi Code Education",
+        "organization": "Microsoft",
         "organizationUrl": "https://makecode.com/",
         "organizationLogo": "./static/Microsoft-logo_rgb_c-gray-square.png",
         "organizationWideLogo": "./static/Microsoft-logo_rgb_c-gray.png",
-        "homeUrl": "https://maker.makecode.com/",
-        "embedUrl": "https://maker.makecode.com/",
+        "homeUrl": "https://picodebr.github.io/pxt-picode/",
+        "embedUrl": "https://picodebr.github.io/pxt-picode/",
         "privacyUrl": "https://go.microsoft.com/fwlink/?LinkId=521839",
         "termsOfUseUrl": "https://go.microsoft.com/fwlink/?LinkID=206977",
-        "githubUrl": "https://github.com/microsoft/pxt-maker",
+        "githubUrl": "https://github.com/picodebr/pxt-picode",
         "feedbackUrl": "https://forum.makecode.com/",
-        "betaUrl": "https://github.com/microsoft/pxt-maker",
+        "betaUrl": "https://github.com/picodebr/pxt-picode",
         "boardName": "board",
         "homeScreenHero": "./static/hero.png",
         "debugger": true,
@@ -332,12 +332,12 @@
             },
             {
                 "name": "GitHub",
-                "path": "https://github.com/microsoft/pxt-maker"
+                "path": "https://github.com/picodebr/pxt-picode"
             }
         ],
         "invertedMenu": false,
         "invertedToolbox": true,
-        "invertedMonaco": false,
+        "invertedMonaco": true,
         "monacoToolbox": true,
         "highContrast": true,
         "greenScreen": true,
