@@ -141,7 +141,7 @@ namespace pxsim {
             this.builtinVisuals["dotstar"] = () => new visuals.NeoPixelView(parsePinString);
             this.builtinPartVisuals["dotstar"] = (xy: visuals.Coord) => visuals.mkNeoPixelPart(xy);
 
-            this.builtinParts["lcd"] =  this.lcdState;
+            this.builtinParts["lcd"] = this.lcdState;
             this.builtinVisuals["lcd"] = () => new visuals.LCDView();
             this.builtinPartVisuals["lcd"] = (xy: visuals.Coord) => visuals.mkLCDPart(xy);
 
@@ -163,15 +163,15 @@ namespace pxsim {
             this.builtinVisuals["screen"] = () => new visuals.ScreenView();
             this.builtinPartVisuals["screen"] = (xy: visuals.Coord) => visuals.mkScreenPart(xy);
 
-            
-            this.neopixelPin = this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_ONBOARD_DOTSTAR_DATA)) 
-            || this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_ONBOARD_NEOPIXEL))
-            || this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_DOTSTAR_DATA)) 
-            || this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_NEOPIXEL));
-            
+
+            this.neopixelPin = this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_ONBOARD_DOTSTAR_DATA))
+                || this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_ONBOARD_NEOPIXEL))
+                || this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_DOTSTAR_DATA))
+                || this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_NEOPIXEL));
+
             this.builtinParts["pixels"] = (pin: Pin) => { return this.neopixelState(!!this.neopixelPin && this.neopixelPin.id); };
             this.builtinVisuals["pixels"] = () => new visuals.NeoPixelView(parsePinString);
-            this.builtinPartVisuals["pixels"] = (xy: visuals.Coord) => visuals.mkNeoPixelPart(xy);    
+            this.builtinPartVisuals["pixels"] = (xy: visuals.Coord) => visuals.mkNeoPixelPart(xy);
         }
 
         receiveMessage(msg: SimulatorMessage) {
@@ -216,12 +216,17 @@ namespace pxsim {
                 partsList: cmpsList,
                 partDefs: cmpDefs,
                 fnArgs: fnArgs,
+                forceBreadboardRender: false,
+                forceBreadboardLayout: false,
                 maxWidth: "100%",
                 maxHeight: "100%",
             };
             this.viewHost = new visuals.BoardHost(pxsim.visuals.mkBoardView({
                 visual: boardDef.visual,
-                boardDef
+                boardDef,
+                wireframe: false,
+                highContrast: false,
+                light: false
             }), opts);
 
             document.body.innerHTML = ""; // clear children

@@ -5,7 +5,6 @@
         "core---samd": "file:../core---samd",
         "buttons": "file:../buttons",
         "mixer---samd": "file:../mixer---samd",
-        "pixel": "file:../pixel",
         "serial": "file:../serial",
         "storage": "file:../storage"
     },
@@ -22,16 +21,12 @@
     "firmwareUrl": "https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/uf2-bootloader-details#updating-the-bootloader",
     "weight": 100,
     "features": [
-        "pixel",
         "pinled",
         "pind0",
         "pind1",
         "pina0",
         "pina1",
-        "buttond0",
         "buttond1",
-        "storage",
-        "jacdac",
-        "music"
+        "storage"
     ]
 }
