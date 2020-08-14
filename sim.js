@@ -176,12 +176,17 @@ var pxsim;
                 partsList: cmpsList,
                 partDefs: cmpDefs,
                 fnArgs: fnArgs,
+                forceBreadboardRender: false,
+                forceBreadboardLayout: false,
                 maxWidth: "100%",
                 maxHeight: "100%",
             };
             this.viewHost = new pxsim.visuals.BoardHost(pxsim.visuals.mkBoardView({
                 visual: boardDef.visual,
-                boardDef: boardDef
+                boardDef: boardDef,
+                wireframe: false,
+                highContrast: false,
+                light: false
             }), opts);
             document.body.innerHTML = ""; // clear children
             document.body.appendChild(this.view = this.viewHost.getView());

@@ -250,7 +250,7 @@
     "ignoreDocsErrors": true,
     "uploadDocs": true,
     "versions": {
-        "target": "0.0.10",
+        "target": "0.0.11",
         "pxt": "6.1.18"
     },
     "blocksprj": {
