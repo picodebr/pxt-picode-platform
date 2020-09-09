@@ -250,7 +250,7 @@
     "ignoreDocsErrors": true,
     "uploadDocs": true,
     "versions": {
-        "target": "0.0.11",
+        "target": "0.0.12",
         "pxt": "6.1.18"
     },
     "blocksprj": {
@@ -269,9 +269,9 @@
             "additionalFilePaths": []
         },
         "files": {
+            "README.md": "",
             "main.blocks": "<xml xmlns=\"http://www.w3.org/1999/xhtml\">\n  <block type=\"pxt-on-start\" x=\"0\" y=\"0\"></block>\n  <block type=\"forever\" x=\"176\" y=\"0\"></block>\n</xml>",
-            "main.ts": "\n",
-            "README.md": ""
+            "main.ts": "\n"
         }
     },
     "tsprj": {
@@ -289,8 +289,8 @@
             "additionalFilePaths": []
         },
         "files": {
-            "main.ts": "\n",
-            "README.md": ""
+            "README.md": "",
+            "main.ts": "\n"
         }
     }
 }
