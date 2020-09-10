@@ -61,8 +61,7 @@
     "libs/radio",
     "libs/radio-broadcast",
     "libs/matrix-keypad",
-    "libs/learnboard",
-    "libs/adafruit-metro-m0-express"
+    "libs/learnboard"
   ],
   "serial": {
     "useHF2": true,
