@@ -58,16 +58,16 @@ CACHE:
 /pxt-picode/worker.js
 /pxt-picode/monacoworker.js
 
-# ver Thu Sep 10 2020 11:55:49 GMT-0300 (Brasilia Standard Time)
+# ver Fri Sep 11 2020 15:25:19 GMT-0300 (GMT-03:00)
 
 # target
-/pxt-picode/docs/static/logo.svg
-/pxt-picode/docs/static/logo.svg
-/pxt-picode/docs/static/logo.svg
-/pxt-picode/docs/static/logo.svg
-/pxt-picode/docs/static/organization.png
-/pxt-picode/docs/static/organization.png
-/pxt-picode/docs/static/hero.png
+/pxt-picode/docs\static\logo.svg
+/pxt-picode/docs\static\logo.svg
+/pxt-picode/docs\static\logo.svg
+/pxt-picode/docs\static\logo.svg
+/pxt-picode/docs\static\organization.png
+/pxt-picode/docs\static\organization.png
+/pxt-picode/docs\static\hero.png
 
 /pxt-picode/target.js
 
