@@ -27,3 +27,4 @@
   - [Teknikio Bluebird](/boards/teknikio-bluebird)
 
 - [Add a new board](/boards/add-a-new-board)
+- [LearnBoard](/boards/learnboard)
