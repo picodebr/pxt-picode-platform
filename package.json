@@ -1,6 +1,6 @@
 {
     "name": "pxt-picode",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "description": "Microsoft MakeCode Pi Code Platform",
     "public": false,
     "keywords": [
