@@ -5,7 +5,7 @@
     {
         "name": "Boards",
         "url": "/boards",
-        "imageUrl": "./docs/static/libs/learnboard.jpeg"
+        "imageUrl": "./docs/static/libs/learnboard.jpg"
     }
 ]
 ```
