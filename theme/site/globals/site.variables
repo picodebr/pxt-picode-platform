@@ -25,7 +25,7 @@
 @blue:#6699ff;
 @pink:#FB48C7;
 
-@green: #228B22; /*#87fd21;*/
+@green: #33cc66; /*#87fd21;*/
 @purple:#8073E5;
 @orange:#FFA702;
 
@@ -75,7 +75,7 @@
 --------------------*/
 
 @fullscreenBackgroundGradientStart: @mainMenuInvertedBackground;
-@fullscreenBackgroundGradientEnd: @green;
+@fullscreenBackgroundGradientEnd: @gray;
 
 /*-------------------
    Side Docs
@@ -130,7 +130,7 @@
    Flyout
 --------------------*/
 
-@flyoutLabelColor: white;
+@flyoutLabelColor: black;
 @blocklyFlyoutColor: #292F36;
 @blocklyFlyoutColorOpacity: 0.9;
 @monacoFlyoutColor: fade(@blocklyFlyoutColor, 90%);

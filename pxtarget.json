@@ -338,11 +338,11 @@
         "path": "https://github.com/picodebr/pxt-picode"
       }
     ],
-    "invertedMenu": true,
+    "invertedMenu": false,
     "invertedToolbox": true,
     "invertedMonaco": true,
     "monacoToolbox": true,
-    "highContrast": true,
+    "highContrast": false,
     "greenScreen": true,
     "blocksCollapsing": true,
     "accessibleBlocks": true,
