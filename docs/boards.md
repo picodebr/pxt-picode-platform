@@ -10,19 +10,19 @@ This editor supports various maker boards, based on SAMD21, SAMD51, NRF52.
         "name": "LearnBoard",
         "url": "/boards/learnboard",
         "cardType": "template",
-        "imageUrl": "./docs/static/libs/learnboard.jpeg"
+        "imageUrl": "./docs/static/libs/learnboard.jpg"
     },
     {
         "name": "Plug&Pi 01",
         "url": "/boards/plug-&-pi-01",
         "cardType": "template",
-        "imageUrl": "./docs/static/libs/plug-&-pi-01.jpeg"
+        "imageUrl": "./docs/static/libs/plug-&-pi-01.jpg"
     },
     {
         "name": "Plug&Pi 02",
         "url": "/boards/plug-&-pi-02",
         "cardType": "template",
-        "imageUrl": "./docs/static/libs/plug-&-pi-02.jpeg"
+        "imageUrl": "./docs/static/libs/plug-&-pi-02.jpg"
     }
 ]
 ```
