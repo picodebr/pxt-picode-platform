@@ -82,7 +82,6 @@ var pxsim;
             _this.lightState = {};
             _this.microphoneState = new pxsim.AnalogSensorState(3001 /* DEVICE_ID_MICROPHONE */, 52, 120, 75, 96);
             _this.storageState = new pxsim.StorageState();
-            _this.lightSensorState = new pxsim.AnalogSensorState(17 /* DEVICE_ID_LIGHT_SENSOR */, 0, 255, 128 / 4, 896 / 4);
             _this.thermometerState = new pxsim.AnalogSensorState(8 /* DEVICE_ID_THERMOMETER */, -20, 50, 10, 30);
             _this.thermometerUnitState = pxsim.TemperatureUnit.Celsius;
             _this.irState = new pxsim.InfraredState();
@@ -137,6 +136,7 @@ var pxsim;
             _this.builtinParts["pixels"] = function (pin) { return _this.neopixelState(!!_this.neopixelPin && _this.neopixelPin.id); };
             _this.builtinVisuals["pixels"] = function () { return new pxsim.visuals.NeoPixelView(parsePinString); };
             _this.builtinPartVisuals["pixels"] = function (xy) { return pxsim.visuals.mkNeoPixelPart(xy); };
+            _this.builtinParts["lightsensor"] = _this.lightSensorState = new pxsim.AnalogSensorState(17 /* DEVICE_ID_LIGHT_SENSOR */, 0, 255);
             return _this;
         }
         DalBoard.prototype.receiveMessage = function (msg) {
@@ -357,9 +357,12 @@ var pxsim;
                 return _this;
             }
             MetroBoardSvg.prototype.updateTheme = function () {
+                var theme = this.props.theme;
+                svg.setGradientColors(this.lightLevelGradient, theme.lightLevelOn, theme.lightLevelOff);
             };
             MetroBoardSvg.prototype.updateState = function () {
                 this.onBoardLeds.forEach(function (l) { return l.updateState(); });
+                this.updateLightLevel();
                 if (this.board.neopixelPin) {
                     var state = this.board.neopixelState(this.board.neopixelPin.id);
                     if (state.buffer) {
@@ -380,6 +383,78 @@ var pxsim;
                 svg.child(neopixelmerge, "feMergeNode", { in: "SourceGraphic" });
                 var style = svg.child(el, "style", {});
                 style.textContent = STYLE;
+            };
+            MetroBoardSvg.prototype.updateLightLevel = function () {
+                var _this = this;
+                var state = this.board;
+                if (!state || !state.lightSensorState.sensorUsed)
+                    return;
+                if (!this.lightLevelButton) {
+                    var gid = "gradient-light-level";
+                    this.lightLevelGradient = svg.linearGradient(this.defs, gid);
+                    var cy_1 = 0;
+                    var r_1 = 20;
+                    this.lightLevelButton = svg.child(this.g, "circle", {
+                        cx: "20px", cy: cy_1 + "px", r: r_1 + "px",
+                        class: 'sim-light-level-button no-drag',
+                        fill: "url(#" + gid + ")"
+                    });
+                    var pt_1 = this.element.createSVGPoint();
+                    svg.buttonEvents(this.lightLevelButton, 
+                    // move
+                    function (ev) {
+                        var pos = svg.cursorPoint(pt_1, _this.element, ev);
+                        var rs = r_1 / 2;
+                        var level = Math.max(0, Math.min(255, Math.floor((pos.y - (cy_1 - rs)) / (2 * rs) * 255)));
+                        if (level != _this.board.lightSensorState.getLevel()) {
+                            _this.board.lightSensorState.setLevel(level);
+                            _this.applyLightLevel();
+                        }
+                    }, 
+                    // start
+                    function (ev) { }, 
+                    // stop
+                    function (ev) { }, 
+                    // keydown
+                    function (ev) {
+                        var charCode = (typeof ev.which == "number") ? ev.which : ev.keyCode;
+                        if (charCode === 40 || charCode === 37) { // Down/Left arrow
+                            if (_this.board.lightSensorState.getLevel() === 0) {
+                                _this.board.lightSensorState.setLevel(255);
+                            }
+                            else {
+                                _this.board.lightSensorState.setLevel(_this.board.lightSensorState.getLevel() - 1);
+                            }
+                            _this.applyLightLevel();
+                        }
+                        else if (charCode === 38 || charCode === 39) { // Up/Right arrow
+                            if (_this.board.lightSensorState.getLevel() === 255) {
+                                _this.board.lightSensorState.setLevel(0);
+                            }
+                            else {
+                                _this.board.lightSensorState.setLevel(_this.board.lightSensorState.getLevel() + 1);
+                            }
+                            _this.applyLightLevel();
+                        }
+                    });
+                    this.lightLevelText = svg.child(this.g, "text", { x: 40, y: cy_1 + r_1 - 30, text: '', class: 'sim-text' });
+                    this.updateTheme();
+                    pxsim.accessibility.makeFocusable(this.lightLevelButton);
+                    pxsim.accessibility.setAria(this.lightLevelButton, "slider", "Light level");
+                    this.lightLevelButton.setAttribute("aria-valuemin", "0");
+                    this.lightLevelButton.setAttribute("aria-valuemax", "255");
+                    this.lightLevelButton.setAttribute("aria-orientation", "vertical");
+                    this.lightLevelButton.setAttribute("aria-valuenow", "128");
+                }
+                svg.setGradientValue(this.lightLevelGradient, Math.min(100, Math.max(0, Math.floor(state.lightSensorState.getLevel() * 100 / 255))) + '%');
+                this.lightLevelText.textContent = state.lightSensorState.getLevel().toString();
+            };
+            MetroBoardSvg.prototype.applyLightLevel = function () {
+                var lv = this.board.lightSensorState.getLevel();
+                svg.setGradientValue(this.lightLevelGradient, Math.min(100, Math.max(0, Math.floor(lv * 100 / 255))) + '%');
+                this.lightLevelText.textContent = lv.toString();
+                this.lightLevelButton.setAttribute("aria-valuenow", lv.toString());
+                pxsim.accessibility.setLiveContent(lv.toString());
             };
             return MetroBoardSvg;
         }(visuals.GenericBoardSvg));
