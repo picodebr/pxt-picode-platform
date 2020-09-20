@@ -104,13 +104,15 @@ namespace pxsim.visuals {
     }
 
     export class MetroBoardSvg extends GenericBoardSvg {
-
         public board: pxsim.DalBoard;
         private onBoardLeds: BoardLed[];
         private onBoardNeopixels: BoardNeopixel[];
         private onBoardReset: BoardResetButton;
         private onBoardButtons: BoardButton[];
         private onBoardTouchPads: BoardTouchButton[];
+        private lightLevelButton: SVGCircleElement;
+        private lightLevelGradient: SVGLinearGradientElement;
+        private lightLevelText: SVGTextElement;
 
         constructor(public props: MetroBoardProps) {
             super(props);
@@ -183,10 +185,13 @@ namespace pxsim.visuals {
         }
 
         public updateTheme() {
+            let theme = this.props.theme;
+            svg.setGradientColors(this.lightLevelGradient, theme.lightLevelOn, theme.lightLevelOff);
         }
 
         public updateState() {
             this.onBoardLeds.forEach(l => l.updateState());
+            this.updateLightLevel();
             if (this.board.neopixelPin) {
                 const state = this.board.neopixelState(this.board.neopixelPin.id);
                 if (state.buffer) {
@@ -210,6 +215,78 @@ namespace pxsim.visuals {
 
             const style = svg.child(el, "style", {});
             style.textContent = STYLE;
+        }
+
+        updateLightLevel() {
+            let state = this.board;
+            if (!state || !state.lightSensorState.sensorUsed) return;
+
+            if (!this.lightLevelButton) {
+                let gid = "gradient-light-level";
+                this.lightLevelGradient = svg.linearGradient(this.defs, gid)
+                let cy = 0;
+                let r = 20;
+                this.lightLevelButton = svg.child(this.g, "circle", {
+                    cx: `20px`, cy: `${cy}px`, r: `${r}px`,
+                    class: 'sim-light-level-button no-drag',
+                    fill: `url(#${gid})`
+                }) as SVGCircleElement;
+                let pt = this.element.createSVGPoint();
+                svg.buttonEvents(this.lightLevelButton,
+                    // move
+                    (ev) => {
+                        let pos = svg.cursorPoint(pt, this.element, ev);
+                        let rs = r / 2;
+                        let level = Math.max(0, Math.min(255, Math.floor((pos.y - (cy - rs)) / (2 * rs) * 255)));
+                        if (level != this.board.lightSensorState.getLevel()) {
+                            this.board.lightSensorState.setLevel(level);
+                            this.applyLightLevel();
+                        }
+                    },
+                    // start
+                    ev => { },
+                    // stop
+                    ev => { },
+                    // keydown
+                    (ev) => {
+                        let charCode = (typeof ev.which == "number") ? ev.which : ev.keyCode
+                        if (charCode === 40 || charCode === 37) { // Down/Left arrow
+                            if (this.board.lightSensorState.getLevel() === 0) {
+                                this.board.lightSensorState.setLevel(255);
+                            } else {
+                                this.board.lightSensorState.setLevel(this.board.lightSensorState.getLevel() - 1);
+                            }
+                            this.applyLightLevel();
+                        } else if (charCode === 38 || charCode === 39) { // Up/Right arrow
+                            if (this.board.lightSensorState.getLevel() === 255) {
+                                this.board.lightSensorState.setLevel(0);
+                            } else {
+                                this.board.lightSensorState.setLevel(this.board.lightSensorState.getLevel() + 1);
+                            }
+                            this.applyLightLevel();
+                        }
+                    });
+                this.lightLevelText = svg.child(this.g, "text", { x: 40, y: cy + r - 30, text: '', class: 'sim-text' }) as SVGTextElement;
+                this.updateTheme();
+
+                accessibility.makeFocusable(this.lightLevelButton);
+                accessibility.setAria(this.lightLevelButton, "slider", "Light level");
+                this.lightLevelButton.setAttribute("aria-valuemin", "0");
+                this.lightLevelButton.setAttribute("aria-valuemax", "255");
+                this.lightLevelButton.setAttribute("aria-orientation", "vertical");
+                this.lightLevelButton.setAttribute("aria-valuenow", "128");
+            }
+
+            svg.setGradientValue(this.lightLevelGradient, Math.min(100, Math.max(0, Math.floor(state.lightSensorState.getLevel() * 100 / 255))) + '%')
+            this.lightLevelText.textContent = state.lightSensorState.getLevel().toString();
+        }
+
+        private applyLightLevel() {
+            let lv = this.board.lightSensorState.getLevel();
+            svg.setGradientValue(this.lightLevelGradient, Math.min(100, Math.max(0, Math.floor(lv * 100 / 255))) + '%')
+            this.lightLevelText.textContent = lv.toString();
+            this.lightLevelButton.setAttribute("aria-valuenow", lv.toString());
+            accessibility.setLiveContent(lv.toString());
         }
     }
 

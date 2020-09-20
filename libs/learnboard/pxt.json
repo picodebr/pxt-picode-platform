@@ -8,7 +8,8 @@
     "serial": "file:../serial",
     "storage": "file:../storage",
     "light": "file:../light",
-    "pixel": "file:../pixel"
+    "pixel": "file:../pixel",
+    "lightsensor": "file:../lightsensor"
   },
   "files": ["README.md", "device.d.ts", "config.ts", "board.json", "board.svg"],
   "public": true,

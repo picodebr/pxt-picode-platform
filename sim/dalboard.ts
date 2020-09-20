@@ -103,7 +103,6 @@ namespace pxsim {
             this.lightState = {};
             this.microphoneState = new AnalogSensorState(DAL.DEVICE_ID_MICROPHONE, 52, 120, 75, 96);
             this.storageState = new StorageState();
-            this.lightSensorState = new AnalogSensorState(DAL.DEVICE_ID_LIGHT_SENSOR, 0, 255, 128 / 4, 896 / 4);
             this.thermometerState = new AnalogSensorState(DAL.DEVICE_ID_THERMOMETER, -20, 50, 10, 30);
             this.thermometerUnitState = TemperatureUnit.Celsius;
             this.irState = new InfraredState();
@@ -172,6 +171,7 @@ namespace pxsim {
             this.builtinParts["pixels"] = (pin: Pin) => { return this.neopixelState(!!this.neopixelPin && this.neopixelPin.id); };
             this.builtinVisuals["pixels"] = () => new visuals.NeoPixelView(parsePinString);
             this.builtinPartVisuals["pixels"] = (xy: visuals.Coord) => visuals.mkNeoPixelPart(xy);
+            this.builtinParts["lightsensor"] = this.lightSensorState = new AnalogSensorState(DAL.DEVICE_ID_LIGHT_SENSOR, 0, 255);
         }
 
         receiveMessage(msg: SimulatorMessage) {

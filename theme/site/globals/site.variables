@@ -32,6 +32,10 @@
 @pageBackground: @grey;
 @serialTextColor: #333;
 
+@lightTextColor: rgba(255, 255, 255, 0.68);
+
+@invertedTextColor: #00f;
+
 /*******************************
          PXT Overrides
 *******************************/
@@ -75,7 +79,7 @@
 --------------------*/
 
 @fullscreenBackgroundGradientStart: @mainMenuInvertedBackground;
-@fullscreenBackgroundGradientEnd: @gray;
+@fullscreenBackgroundGradientEnd: @grey;
 
 /*-------------------
    Side Docs
@@ -119,6 +123,7 @@
 @homeCardBorderColor: lighten(@green, 10%);
 @homeCardHoverBorderColor: darken(@green, 10%);
 @homeCardImageBorderRadius: 5px;
+
 
 /*-------------------
    Greenscreen

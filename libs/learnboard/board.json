@@ -158,6 +158,6 @@
     "SDA": "SDA",
     "SCL": "SCL"
   },
-  "onboardComponents": ["pixel"],
+  "onboardComponents": ["pixel", "lightsensor"],
   "marginWhenBreadboarding": [0, 0, 80, 0]
 }
