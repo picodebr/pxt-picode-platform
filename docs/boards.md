@@ -16,13 +16,13 @@ This editor supports various maker boards, based on SAMD21, SAMD51, NRF52.
         "name": "Plug&Pi 01",
         "url": "/boards/plug-&-pi-01",
         "cardType": "template",
-        "imageUrl": "./docs/static/libs/plug-&-pi-01.jpg"
+        "imageUrl": "./docs/static/libs/plug-and-pi-01.jpg"
     },
     {
         "name": "Plug&Pi 02",
         "url": "/boards/plug-&-pi-02",
         "cardType": "template",
-        "imageUrl": "./docs/static/libs/plug-&-pi-02.jpg"
+        "imageUrl": "./docs/static/libs/plug-and-pi-02.jpg"
     }
 ]
 ```
