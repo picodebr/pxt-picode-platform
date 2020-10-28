@@ -1,0 +1,26 @@
+{
+  "name": "plug-and-pi-01",
+  "description": "Plug&Pi 1",
+  "dependencies": {
+    "core---samd": "file:../core---samd",
+    "mixer---samd": "file:../mixer---samd",
+    "serial": "file:../serial",
+    "storage": "file:../storage",
+    "lightsensor": "file:../lightsensor"
+  },
+  "files": ["README.md", "device.d.ts", "config.ts", "board.json", "board.svg"],
+  "public": true,
+  "core": true,
+  "compileServiceVariant": "samd21",
+  "firmwareUrl": "https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/uf2-bootloader-details#updating-the-bootloader",
+  "weight": 100,
+  "features": [
+    "pinled",
+    "pind0",
+    "pind1",
+    "pina0",
+    "pina1",
+    "storage",
+    "lightsensor"
+  ]
+}

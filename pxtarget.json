@@ -62,8 +62,8 @@
     "libs/radio-broadcast",
     "libs/matrix-keypad",
     "libs/learnboard",
-    "libs/plug-&-pi-01",
-    "libs/plug-&-pi-02"
+    "libs/plug-and-pi-01",
+    "libs/plug-and-pi-02"
   ],
   "serial": {
     "useHF2": true,

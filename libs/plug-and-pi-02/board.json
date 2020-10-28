@@ -1,0 +1,53 @@
+{
+  "driveDisplayName": "",
+  "visual": {
+    "image": "pkg://board.svg",
+    "useCrocClips": false,
+    "width": 400,
+    "height": 203.325927734375,
+    "pinDist": 15,
+    "pinBlocks": [],
+    "leds": [
+      {
+        "x": 68.97225061470724,
+        "y": 152.66979074132675,
+        "w": 28.54528819762123,
+        "h": 28.344247180192863,
+        "color": "#00ff00",
+        "label": "LED1"
+      },
+      {
+        "x": 69.26501833400046,
+        "y": 87.57013360458393,
+        "w": 28.539190266182526,
+        "h": 28.344247180192863,
+        "color": "#ffff00",
+        "label": "LED3"
+      },
+      {
+        "x": 68.33181145642727,
+        "y": 22.53145630066776,
+        "w": 28.54528819762123,
+        "h": 28.34425276442664,
+        "color": "#ff0000",
+        "label": "LED2"
+      }
+    ],
+    "touchPads": [],
+    "buttons": []
+  },
+  "gpioPinMap": {
+    "LED1": "LED1",
+    "LED2": "LED2",
+    "LED3": "LED3"
+  },
+  "groundPins": [],
+  "threeVoltPins": [],
+  "fiveVoltPins": [],
+  "i2cPins": {
+    "SDA": "SDA",
+    "SCL": "SCL"
+  },
+  "onboardComponents": [],
+  "marginWhenBreadboarding": [0, 0, 80, 0]
+}
