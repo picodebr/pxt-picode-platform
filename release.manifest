@@ -1,0 +1,75 @@
+CACHE MANIFEST
+
+CACHE:
+/pxt-picode-platform/semantic.js
+/pxt-picode-platform/main.js
+/pxt-picode-platform/pxtapp.js
+/pxt-picode-platform/typescript.js
+/pxt-picode-platform/marked/marked.min.js
+/pxt-picode-platform/highlight.js/highlight.pack.js
+/pxt-picode-platform/jquery.js
+/pxt-picode-platform/pxtlib.js
+/pxt-picode-platform/pxtcompiler.js
+/pxt-picode-platform/pxtpy.js
+/pxt-picode-platform/pxtblockly.js
+/pxt-picode-platform/pxtwinrt.js
+/pxt-picode-platform/pxteditor.js
+/pxt-picode-platform/pxtsim.js
+/pxt-picode-platform/pxtembed.js
+/pxt-picode-platform/pxtworker.js
+/pxt-picode-platform/pxtweb.js
+/pxt-picode-platform/blockly.css
+/pxt-picode-platform/semantic.css
+/pxt-picode-platform/rtlsemantic.css
+
+
+
+
+
+# blockly
+/pxt-picode-platform/blockly/media/sprites.png
+/pxt-picode-platform/blockly/media/click.mp3
+/pxt-picode-platform/blockly/media/disconnect.wav
+/pxt-picode-platform/blockly/media/delete.mp3
+
+# monaco; keep in sync with webapp/public/index.html
+/pxt-picode-platform/vs/loader.js
+/pxt-picode-platform/vs/base/worker/workerMain.js
+/pxt-picode-platform/vs/basic-languages/bat/bat.js
+/pxt-picode-platform/vs/basic-languages/cpp/cpp.js
+/pxt-picode-platform/vs/basic-languages/python/python.js
+/pxt-picode-platform/vs/basic-languages/markdown/markdown.js
+/pxt-picode-platform/vs/editor/editor.main.css
+/pxt-picode-platform/vs/editor/editor.main.js
+/pxt-picode-platform/vs/editor/editor.main.nls.js
+/pxt-picode-platform/vs/language/json/jsonMode.js
+/pxt-picode-platform/vs/language/json/jsonWorker.js
+
+# charts
+/pxt-picode-platform/smoothie/smoothie_compressed.js
+/pxt-picode-platform/images/Bars_black.gif
+
+# gifjs
+/pxt-picode-platform/gifjs/gif.js
+
+# ai
+/pxt-picode-platform/ai.0.js
+
+/pxt-picode-platform/worker.js
+/pxt-picode-platform/monacoworker.js
+
+# ver Tue Jan 19 2021 10:57:01 GMT-0300 (Horário Padrão de Brasília)
+
+# target
+/pxt-picode-platform/docs\static\logo.svg
+/pxt-picode-platform/docs\static\logo.svg
+/pxt-picode-platform/docs\static\logo.svg
+/pxt-picode-platform/docs\static\logo.svg
+/pxt-picode-platform/docs\static\organization.png
+/pxt-picode-platform/docs\static\organization.png
+/pxt-picode-platform/docs\static\hero.png
+
+/pxt-picode-platform/target.js
+
+NETWORK:
+*
