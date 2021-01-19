@@ -1,7 +1,0 @@
-# APIs
-
-## Pins
-
-```apis
-pins
-```

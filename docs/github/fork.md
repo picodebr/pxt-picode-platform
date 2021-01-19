@@ -1,3 +1,0 @@
-# Fork
-
-Information about forking project repositories is coming soon...
