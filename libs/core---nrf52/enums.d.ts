@@ -1,4 +1,6 @@
 // Auto-generated. Do not edit.
+declare namespace pxt {
+}
 
 
     declare const enum PulseValue {
